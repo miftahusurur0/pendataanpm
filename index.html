@@ -393,7 +393,13 @@
 
         <!-- 3. SDM / GURU -->
         <div class="rekap-section-title"><i class="fas fa-chalkboard-teacher"></i> Guru & Tenaga Pendidik <span class="count" id="rcGuru">0</span></div>
-        <table class="rekap-tb" id="tbGuru"><thead><tr><th style="width:50px">No</th><th>Kategori</th><th style="width:100px">Laki-laki</th><th style="width:100px">Perempuan</th><th style="width:110px">Jumlah</th></tr></thead><tbody></tbody><tfoot><tr class="subtotal"><td colspan="2" style="text-align:right">Subtotal SDM</td><td id="rgL">0</td><td id="rgP">0</td><td id="rgT">0</td></tr></tfoot></table>
+        <table class="rekap-tb" id="tbGuru"><thead><tr><th style="width:50px">No</th><th>Kategori</th><th style="width:100px">Laki-laki</th><th style="width:100px">Perempuan</th><th style="width:110px">Jumlah</th></tr></thead><tbody></tbody><tfoot>
+            <tr class="subtotal"><td colspan="2" style="text-align:right">Subtotal GURU</td><td id="rgGuruL">0</td><td id="rgGuruP">0</td><td id="rgGuruT">0</td></tr>
+            <tr class="subtotal"><td colspan="2" style="text-align:right">Subtotal Tenaga Pendidik</td><td id="rgTendikL">0</td><td id="rgTendikP">0</td><td id="rgTendikT">0</td></tr>
+            <tr class="porsi-kecil"><td colspan="2" style="text-align:right">SDM Porsi Kecil (RA/TK/PAUD)</td><td id="rgKecilL">0</td><td id="rgKecilP">0</td><td id="rgKecilT">0</td></tr>
+            <tr class="porsi-besar"><td colspan="2" style="text-align:right">SDM Porsi Besar (SD-SMA/PONPES)</td><td id="rgBesarL">0</td><td id="rgBesarP">0</td><td id="rgBesarT">0</td></tr>
+            <tr class="subtotal" style="font-size:.88rem"><td colspan="2" style="text-align:right;font-weight:800;color:var(--accent2)">Total SDM</td><td id="rgL" style="font-weight:800;color:var(--accent2)">0</td><td id="rgP" style="font-weight:800;color:var(--accent2)">0</td><td id="rgT" style="font-weight:800;color:var(--accent2)">0</td></tr>
+        </tfoot></table>
 
         <!-- GRAND TOTAL -->
         <table class="rekap-tb" style="margin-top:1.25rem"><tfoot><tr class="grand-total"><td colspan="2" style="text-align:right;font-size:1rem">TOTAL SELURUH PENERIMA MANFAAT</td><td id="rallL">0</td><td id="rallP">0</td><td id="rallT">0</td></tr></tfoot></table>
@@ -485,7 +491,7 @@ const SDM_KECIL_CATS=['GURU RA/TK/PAUD','TENDIK RA/TK/PAUD'];
 const SDM_BESAR_CATS=['GURU SD-SMA/PONPES','TENDIK SD-SMA/PONPES'];
 
 /* ==================== STATE ==================== */
-const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbw43ls3NZi6vphhDY-cBQF_AbqCW_3gNM4JsdPAPxaBtBm8eSrXo1d1gYeyfD8dSy5k/exec';
+const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbxfE01hMeVKQ5mnhlUTgU1JMshL_Ui3Aid0ArlJ1jl41NobejJuBk0E9Rj4LLx3ssZB/exec';
 let data=[],curView='instansi',curFilter='semua',curKatFilter='semua',delCb=null,chKat=null,chTipe=null,useGS=false,gsUrl='',searchTimer=null;
 
 /* ==================== SIDEBAR (mobile) ==================== */
@@ -569,6 +575,8 @@ function renderRekap(){
     renderTb('tbGuru',guruKats);
 
     const rp=sumKat(posyanduKats),rs=sumKat(siswaKats),rg=sumKat(guruKats);
+    const guruAll=sumKat(['GURU RA/TK/PAUD','GURU SD-SMA/PONPES']),tendikAll=sumKat(['TENDIK RA/TK/PAUD','TENDIK SD-SMA/PONPES']);
+    const sdmKecil=sumKat(SDM_KECIL_CATS),sdmBesar=sumKat(SDM_BESAR_CATS);
     document.getElementById('rpL').textContent=rp.l.toLocaleString('id-ID');
     document.getElementById('rpP').textContent=rp.p.toLocaleString('id-ID');
     document.getElementById('rpT').textContent=rp.t.toLocaleString('id-ID');
@@ -578,6 +586,18 @@ function renderRekap(){
     document.getElementById('rgL').textContent=rg.l.toLocaleString('id-ID');
     document.getElementById('rgP').textContent=rg.p.toLocaleString('id-ID');
     document.getElementById('rgT').textContent=rg.t.toLocaleString('id-ID');
+    document.getElementById('rgGuruL').textContent=guruAll.l.toLocaleString('id-ID');
+    document.getElementById('rgGuruP').textContent=guruAll.p.toLocaleString('id-ID');
+    document.getElementById('rgGuruT').textContent=guruAll.t.toLocaleString('id-ID');
+    document.getElementById('rgTendikL').textContent=tendikAll.l.toLocaleString('id-ID');
+    document.getElementById('rgTendikP').textContent=tendikAll.p.toLocaleString('id-ID');
+    document.getElementById('rgTendikT').textContent=tendikAll.t.toLocaleString('id-ID');
+    document.getElementById('rgKecilL').textContent=sdmKecil.l.toLocaleString('id-ID');
+    document.getElementById('rgKecilP').textContent=sdmKecil.p.toLocaleString('id-ID');
+    document.getElementById('rgKecilT').textContent=sdmKecil.t.toLocaleString('id-ID');
+    document.getElementById('rgBesarL').textContent=sdmBesar.l.toLocaleString('id-ID');
+    document.getElementById('rgBesarP').textContent=sdmBesar.p.toLocaleString('id-ID');
+    document.getElementById('rgBesarT').textContent=sdmBesar.t.toLocaleString('id-ID');
 
     const allL=rp.l+rs.l+rg.l,allP=rp.p+rs.p+rg.p,allT=rp.t+rs.t+rg.t;
     document.getElementById('rallL').textContent=allL.toLocaleString('id-ID');
@@ -639,7 +659,13 @@ function dlExcel(){
     rows.push(['GURU & TENAGA PENDIDIK (SDM)']);
     rows.push(['No','Kategori','Laki-laki','Perempuan','Jumlah']);
     guruKats.forEach((k,i)=>{const items=data.filter(d=>d.kategori===k);rows.push([i+1,k,items.reduce((s,d)=>s+(d.jumlahL||0),0),items.reduce((s,d)=>s+(d.jumlahP||0),0),items.reduce((s,d)=>s+(d.jumlahTotal||0),0)])});
-    const rg=sumKat(guruKats);rows.push(['','Subtotal SDM',rg.l,rg.p,rg.t]);rows.push([]);
+    const guruAll=sumKat(['GURU RA/TK/PAUD','GURU SD-SMA/PONPES']),tendikAll=sumKat(['TENDIK RA/TK/PAUD','TENDIK SD-SMA/PONPES']);
+    const sdmKecil=sumKat(SDM_KECIL_CATS),sdmBesar=sumKat(SDM_BESAR_CATS);
+    rows.push(['','Subtotal GURU',guruAll.l,guruAll.p,guruAll.t]);
+    rows.push(['','Subtotal Tenaga Pendidik',tendikAll.l,tendikAll.p,tendikAll.t]);
+    rows.push(['','SDM Porsi Kecil (RA/TK/PAUD)',sdmKecil.l,sdmKecil.p,sdmKecil.t]);
+    rows.push(['','SDM Porsi Besar (SD-SMA/PONPES)',sdmBesar.l,sdmBesar.p,sdmBesar.t]);
+    const rg=sumKat(guruKats);rows.push(['','Total SDM',rg.l,rg.p,rg.t]);rows.push([]);
 
     rows.push(['','TOTAL SELURUH PM',rp.l+rs.l+rg.l,rp.p+rs.p+rg.p,rp.t+rs.t+rg.t]);rows.push([]);
 
