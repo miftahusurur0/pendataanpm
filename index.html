@@ -316,21 +316,6 @@
         <div class="rekap-section-title"><i class="fas fa-baby"></i> Posyandu <span class="count" id="rcPos">0</span></div>
         <table class="rekap-tb" id="tbPosyandu"><thead><tr><th style="width:50px">No</th><th>Kategori</th><th style="width:100px">Laki-laki</th><th style="width:100px">Perempuan</th><th style="width:110px">Jumlah</th></tr></thead><tbody></tbody><tfoot><tr class="subtotal"><td colspan="2" style="text-align:right">Subtotal Posyandu</td><td id="rpL">0</td><td id="rpP">0</td><td id="rpT">0</td></tr></tfoot></table>
 
-        <!-- 1b. RINCIAN PORSI PER INSTANSI POSYANDU -->
-        <div class="rekap-section-title" style="margin-top:1rem"><i class="fas fa-utensils"></i> Rincian Porsi per Instansi Posyandu <span class="count" id="rcPorsiInst">0</span></div>
-        <div style="overflow-x:auto"><table class="rekap-tb" id="tbPorsiInstansi"><thead><tr>
-            <th style="width:50px">No</th><th>Instansi</th><th>PIC</th>
-            <th style="width:85px">BUMIL</th><th style="width:85px">BUSUI</th><th style="width:95px;background:#dbeafe">Porsi Besar</th>
-            <th style="width:85px">BALITA</th><th style="width:85px">ATS &lt; 9</th><th style="width:95px;background:#fffbeb">Porsi Kecil</th>
-            <th style="width:100px">Total</th>
-        </tr></thead><tbody id="tbPorsiInstansiBody"></tbody>
-        <tfoot><tr class="subtotal">
-            <td colspan="2" style="text-align:right">Subtotal</td><td></td>
-            <td id="rpiBumil">0</td><td id="rpiBusui">0</td><td id="rpiPBesar">0</td>
-            <td id="rpiBalita">0</td><td id="rpiAts">0</td><td id="rpiPKecil">0</td>
-            <td id="rpiTotal">0</td>
-        </tr></tfoot></table></div>
-
         <!-- 2. SISWA -->
         <div class="rekap-section-title"><i class="fas fa-school"></i> Siswa (Tanpa Guru) <span class="count" id="rcSis">0</span></div>
         <table class="rekap-tb" id="tbSiswa"><thead><tr><th style="width:50px">No</th><th>Kategori</th><th style="width:100px">Laki-laki</th><th style="width:100px">Perempuan</th><th style="width:110px">Jumlah</th></tr></thead><tbody></tbody><tfoot><tr class="subtotal"><td colspan="2" style="text-align:right">Subtotal Siswa</td><td id="rsL">0</td><td id="rsP">0</td><td id="rsT">0</td></tr></tfoot></table>
@@ -408,7 +393,7 @@
         <textarea id="gsCode" readonly style="width:100%;height:120px;padding:.7rem;background:#1e293b;color:#e2e8f0;border:1.5px solid var(--border);border-radius:9px;font-family:monospace;font-size:.7rem;line-height:1.4;resize:vertical;outline:none">const SN="Data PM";const HD=['id','namaInstansi','npsn','namaPIC','tipe','kategori','jumlahL','jumlahP','jumlahTotal','createdAt','updatedAt'];function gs_(){const ss=SpreadsheetApp.getActiveSpreadsheet();if(!ss)throw new Error('Script tidak terikat ke Spreadsheet. Buka lewat Extensions > Apps Script di dalam Google Sheet.');let s=ss.getSheetByName(SN);if(!s)s=ss.getSheetByName('Sheet1');if(!s)s=ss.getSheets()[0];if(!s)s=ss.insertSheet(SN);if(s.getLastRow()===0)s.appendRow(HD);return s}function jo_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON)}function doGet(e){try{const s=gs_();const d=s.getDataRange().getValues();const h=d.shift();const r=d.filter(r=>r[0]).map(r=>{let o={};h.forEach((h,i)=>o[h]=r[i]);return o});return jo_({status:"success",data:r})}catch(err){return jo_({status:"error",message:String(err)})}}function doPost(e){try{const s=gs_();const b=JSON.parse(e.postData.contents);const h=s.getRange(1,1,1,s.getLastColumn()).getValues()[0];if(b.action==="save"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let ru=-1;for(let i=1;i<a.length;i++){if(String(a[i][ic])===String(b.data.id)){ru=i+1;break}}const row=h.map(h=>b.data[h]!==undefined?b.data[h]:"");if(ru>0){s.getRange(ru,1,1,row.length).setValues([row])}else{s.appendRow(row)}return jo_({status:"success"})}if(b.action==="delete"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let dl=false;for(let i=a.length-1;i>0;i--){if(String(a[i][ic])===String(b.id)){s.deleteRow(i+1);dl=true;break}}if(!dl)return jo_({status:"error",message:"Data tidak ditemukan (id: "+b.id+")"});return jo_({status:"success"})}if(b.action==="clear"){const lr=s.getLastRow();if(lr>1)s.deleteRows(2,lr-1);return jo_({status:"success"})}return jo_({status:"error",message:"Action tidak dikenal: "+b.action})}catch(err){return jo_({status:"error",message:String(err)})}}</textarea>
         <button class="btn btn-o btn-sm" onclick="copyGsCode()" style="margin-top:.4rem"><i class="fas fa-copy"></i> Copy</button>
     </div>
-    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/AKfycbxWY0RdZhnF_I5uuyHbAP8bPLzBP6WJ0OxMF1t-kJmwtjEvQKbfz8NswUhCuXncJd3Z/exec"></div>
+    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/xxxxx/exec"></div>
     <div style="display:flex;gap:.6rem;flex-wrap:wrap"><button class="btn btn-p" onclick="connectGS()"><i class="fas fa-plug"></i> Hubungkan</button><button class="btn btn-o" onclick="testGS()"><i class="fas fa-vial"></i> Test</button><button class="btn btn-d" onclick="disconnectGS()"><i class="fas fa-unlink"></i> Putuskan</button></div>
 </div>
 </div>
@@ -426,7 +411,7 @@
 const KAT={posyandu:['BUMIL','BUSUI','BALITA','ATS < 9'],sekolah:[{group:'Pendidikan Anak',items:['RA','TK','PAUD']},{group:'SD / MI',items:['SD 1-3','SD 4-6','MI 1-3','MI 4-6']},{group:'SMP / MTS',items:['SMP','MTS']},{group:'SMA / MA / SMK',items:['SMA','SMK','MA']},{group:'Ponpes',items:['PONPES (SANTRI)']},{group:'SDM / Guru',items:['TENAGA PENDIDIK','GURU']}]};
 
 /* ==================== STATE ==================== */
-const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbxWY0RdZhnF_I5uuyHbAP8bPLzBP6WJ0OxMF1t-kJmwtjEvQKbfz8NswUhCuXncJd3Z/exec';
+const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbz4suKbbohweXuZQoNpy0FgnjATkQiejptor-qkkTOlAprf7i9zKop-Xdz_54yoLIZj/exec';
 let data=[],curView='instansi',curFilter='semua',curKatFilter='semua',delCb=null,chKat=null,chTipe=null,useGS=false,gsUrl='',searchTimer=null;
 
 /* ==================== SIDEBAR (mobile) ==================== */
@@ -533,25 +518,6 @@ function renderRekap(){
     document.getElementById('rcPos').textContent=rp.t;
     document.getElementById('rcSis').textContent=rs.t;
     document.getElementById('rcGuru').textContent=rg.t;
-
-    // Per-institution Posyandu Porsi breakdown
-    const posyanduEntries=data.filter(d=>d.tipe==='posyandu');
-    const posGroups={};
-    posyanduEntries.forEach(d=>{const k=(d.namaInstansi||'').trim().toLowerCase();if(!posGroups[k])posGroups[k]={label:(d.namaInstansi||'').trim(),pic:d.namaPIC||'',bumil:0,busui:0,balita:0,ats:0};if(d.kategori==='BUMIL')posGroups[k].bumil+=(d.jumlahTotal||0);else if(d.kategori==='BUSUI')posGroups[k].busui+=(d.jumlahTotal||0);else if(d.kategori==='BALITA')posGroups[k].balita+=(d.jumlahTotal||0);else if(d.kategori==='ATS < 9')posGroups[k].ats+=(d.jumlahTotal||0)});
-    const piBody=document.getElementById('tbPorsiInstansiBody');
-    let piHtml='';
-    let tBumil=0,tBusui=0,tBalita=0,tAts=0;
-    const posGroupArr=Object.values(posGroups).sort((a,b)=>a.label.localeCompare(b.label));
-    posGroupArr.forEach((g,idx)=>{const pB=g.bumil+g.busui,pK=g.balita+g.ats;tBumil+=g.bumil;tBusui+=g.busui;tBalita+=g.balita;tAts+=g.ats;piHtml+='<tr><td>'+(idx+1)+'</td><td>'+esc(g.label)+'</td><td style="font-size:.8rem">'+esc(g.pic)+'</td><td>'+(g.bumil?g.bumil.toLocaleString('id-ID'):'<span style="opacity:.3">0</span>')+'</td><td>'+(g.busui?g.busui.toLocaleString('id-ID'):'<span style="opacity:.3">0</span>')+'</td><td style="font-weight:700;color:#1d4ed8;background:#eff6ff">'+pB.toLocaleString('id-ID')+'</td><td>'+(g.balita?g.balita.toLocaleString('id-ID'):'<span style="opacity:.3">0</span>')+'</td><td>'+(g.ats?g.ats.toLocaleString('id-ID'):'<span style="opacity:.3">0</span>')+'</td><td style="font-weight:700;color:#92400e;background:#fffbeb">'+pK.toLocaleString('id-ID')+'</td><td style="font-weight:800">'+(pB+pK).toLocaleString('id-ID')+'</td></tr>'});
-    piBody.innerHTML=piHtml;
-    document.getElementById('rpiBumil').textContent=tBumil.toLocaleString('id-ID');
-    document.getElementById('rpiBusui').textContent=tBusui.toLocaleString('id-ID');
-    document.getElementById('rpiPBesar').textContent=(tBumil+tBusui).toLocaleString('id-ID');
-    document.getElementById('rpiBalita').textContent=tBalita.toLocaleString('id-ID');
-    document.getElementById('rpiAts').textContent=tAts.toLocaleString('id-ID');
-    document.getElementById('rpiPKecil').textContent=(tBalita+tAts).toLocaleString('id-ID');
-    document.getElementById('rpiTotal').textContent=(tBumil+tBusui+tBalita+tAts).toLocaleString('id-ID');
-    document.getElementById('rcPorsiInst').textContent=posGroupArr.length;
 }
 
 /* ==================== DOWNLOAD FUNCTIONS ==================== */
@@ -590,17 +556,6 @@ function dlExcel(){
     rows.push(['No','Kategori','Laki-laki','Perempuan','Jumlah']);
     posyanduKats.forEach((k,i)=>{const items=data.filter(d=>d.kategori===k);rows.push([i+1,k,items.reduce((s,d)=>s+(d.jumlahL||0),0),items.reduce((s,d)=>s+(d.jumlahP||0),0),items.reduce((s,d)=>s+(d.jumlahTotal||0),0)])});
     const rp=sumKat(posyanduKats);rows.push(['','Subtotal Posyandu',rp.l,rp.p,rp.t]);rows.push([]);
-
-    // Per-institution Posyandu Porsi breakdown in Excel
-    const posEntries=data.filter(d=>d.tipe==='posyandu');
-    const posGrps={};
-    posEntries.forEach(d=>{const k=(d.namaInstansi||'').trim().toLowerCase();if(!posGrps[k])posGrps[k]={label:(d.namaInstansi||'').trim(),pic:d.namaPIC||'',bumil:0,busui:0,balita:0,ats:0};if(d.kategori==='BUMIL')posGrps[k].bumil+=(d.jumlahTotal||0);else if(d.kategori==='BUSUI')posGrps[k].busui+=(d.jumlahTotal||0);else if(d.kategori==='BALITA')posGrps[k].balita+=(d.jumlahTotal||0);else if(d.kategori==='ATS < 9')posGrps[k].ats+=(d.jumlahTotal||0)});
-    rows.push(['RINCIAN PORSI PER INSTANSI POSYANDU']);
-    rows.push(['No','Instansi','PIC','BUMIL','BUSUI','Porsi Besar','BALITA','ATS < 9','Porsi Kecil','Total']);
-    const pArr=Object.values(posGrps).sort((a,b)=>a.label.localeCompare(b.label));
-    let eBumil=0,eBusui=0,eBalita=0,eAts=0;
-    pArr.forEach((g,i)=>{const pB=g.bumil+g.busui,pK=g.balita+g.ats;eBumil+=g.bumil;eBusui+=g.busui;eBalita+=g.balita;eAts+=g.ats;rows.push([i+1,g.label,g.pic,g.bumil,g.busui,pB,g.balita,g.ats,pK,pB+pK])});
-    rows.push(['','Subtotal','',eBumil,eBusui,eBumil+eBusui,eBalita,eAts,eBalita+eAts,eBumil+eBusui+eBalita+eAts]);rows.push([]);
 
     rows.push(['SISWA (TANPA GURU)']);
     rows.push(['No','Kategori','Laki-laki','Perempuan','Jumlah']);
