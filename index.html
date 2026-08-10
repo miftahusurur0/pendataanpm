@@ -422,7 +422,7 @@
     <div class="card" style="margin-bottom:1rem">
         <div class="card-hd" style="flex-wrap:wrap;gap:.5rem">
             <div style="display:flex;gap:.45rem;align-items:center;flex-wrap:wrap">
-                <div class="search-wrap"><i class="fas fa-search"></i><input type="text" class="form-input" id="srcLap" placeholder="Cari..." style="padding-left:2.5rem;width:180px" oninput="debounceSearch()"></div>
+                <div class="search-wrap" style="flex:1;min-width:140px;max-width:220px"><i class="fas fa-search"></i><input type="text" class="form-input" id="srcLap" placeholder="Cari instansi, PIC, kategori..." style="padding-left:2.5rem;width:100%" oninput="liveSearch()"></div>
                 <div class="view-toggle"><button class="view-btn active" data-v="instansi" onclick="setView('instansi')"><i class="fas fa-building"></i> Instansi</button><button class="view-btn" data-v="pic" onclick="setView('pic')"><i class="fas fa-user"></i> PIC</button><button class="view-btn" data-v="flat" onclick="setView('flat')"><i class="fas fa-list"></i> Tabel</button></div>
                 <div class="filter-tabs" id="mainFilterTabs"><button class="filter-tab active" data-f="semua" onclick="setFilter('semua')">Semua</button><button class="filter-tab" data-f="posyandu" onclick="setFilter('posyandu')">Posyandu</button><button class="filter-tab" data-f="sekolah" onclick="setFilter('sekolah')">Sekolah</button><button class="filter-tab" data-f="sdm" onclick="setFilter('sdm')">SDM/Guru</button></div><div class="filter-tabs" id="katFilterTabs" style="display:none;margin-top:.3rem"><button class="filter-tab active" data-kf="semua" onclick="setKatFilter('semua')">Semua Kategori</button><button class="filter-tab" data-kf="BUMIL" onclick="setKatFilter('BUMIL')">BUMIL</button><button class="filter-tab" data-kf="BUSUI" onclick="setKatFilter('BUSUI')">BUSUI</button><button class="filter-tab" data-kf="BALITA" onclick="setKatFilter('BALITA')">BALITA</button><button class="filter-tab" data-kf="ATS < 9" onclick="setKatFilter('ATS < 9')">ATS &lt; 9</button></div>
             </div>
@@ -493,7 +493,7 @@ const PORSI_KECIL_CATS=['BALITA','ATS < 9','RA','TK','PAUD','SD 1-3','MI 1-3','G
 const PORSI_BESAR_CATS=['BUMIL','BUSUI','SD 4-6','MI 4-6','SMP','MTS','SMA','SMK','MA','PONPES (SANTRI)','GURU SD-SMA/PONPES','TENDIK SD-SMA/PONPES'];
 
 /* ==================== STATE ==================== */
-const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbzoMXoXtVNco49YSAGjGTe25zGsVmkyr8StdRYvADKU0T6n4njLP5RRMNlqDBDlGYBg/exec';
+const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbwYHtk5nFMLy1dsql4t1EMT9IwHZVT88nNBWBFBHF6yhitz0NMWTyp5D_gxDFRahxTK/exec';
 let data=[],curView='instansi',curFilter='semua',curKatFilter='semua',delCb=null,chKat=null,chTipe=null,useGS=false,gsUrl='',searchTimer=null;
 
 /* ==================== SIDEBAR (mobile) ==================== */
@@ -689,7 +689,8 @@ function dlExcel(){
 /* ==================== LAPORAN ==================== */
 function setView(v){curView=v;document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('active',b.dataset.v===v));renderLap()}
 function setFilter(f){curFilter=f;document.querySelectorAll('#mainFilterTabs .filter-tab').forEach(b=>b.classList.toggle('active',b.dataset.f===f));const kfEl=document.getElementById('katFilterTabs');if(f==='posyandu'){kfEl.innerHTML='<button class="filter-tab active" data-kf="semua" onclick="setKatFilter(\'semua\')">Semua Kategori</button><button class="filter-tab" data-kf="BUMIL" onclick="setKatFilter(\'BUMIL\')">BUMIL</button><button class="filter-tab" data-kf="BUSUI" onclick="setKatFilter(\'BUSUI\')">BUSUI</button><button class="filter-tab" data-kf="BALITA" onclick="setKatFilter(\'BALITA\')">BALITA</button><button class="filter-tab" data-kf="ATS < 9" onclick="setKatFilter(\'ATS < 9\')">ATS &lt; 9</button>';kfEl.style.display='flex'}else if(f==='sdm'){kfEl.innerHTML='<button class="filter-tab active" data-kf="semua" onclick="setKatFilter(\'semua\')">Semua SDM</button><button class="filter-tab" data-kf="GURU RA/TK/PAUD" onclick="setKatFilter(\'GURU RA/TK/PAUD\')">Guru RA/TK/PAUD</button><button class="filter-tab" data-kf="TENDIK RA/TK/PAUD" onclick="setKatFilter(\'TENDIK RA/TK/PAUD\')">Tendik RA/TK/PAUD</button><button class="filter-tab" data-kf="GURU SD-SMA/PONPES" onclick="setKatFilter(\'GURU SD-SMA/PONPES\')">Guru SD-SMA/PONPES</button><button class="filter-tab" data-kf="TENDIK SD-SMA/PONPES" onclick="setKatFilter(\'TENDIK SD-SMA/PONPES\')">Tendik SD-SMA/PONPES</button>';kfEl.style.display='flex'}else{kfEl.style.display='none'}curKatFilter='semua';renderLap()}
-function debounceSearch(){clearTimeout(searchTimer);searchTimer=setTimeout(renderLap,150)}
+function liveSearch(){renderLap()}
+function debounceSearch(){clearTimeout(searchTimer);searchTimer=setTimeout(renderLap,80)}
 function setKatFilter(f){curKatFilter=f;document.querySelectorAll('#katFilterTabs .filter-tab').forEach(b=>b.classList.toggle('active',b.dataset.kf===f));renderLap()}
 function getFiltered(){const s=(document.getElementById('srcLap').value||'').toLowerCase();let f=data;if(curFilter==='posyandu'){f=f.filter(d=>d.tipe==='posyandu');if(curKatFilter!=='semua')f=f.filter(d=>d.kategori===curKatFilter)}else if(curFilter==='sekolah')f=f.filter(d=>d.tipe==='sekolah'&&!SDM_CATS.includes(d.kategori));else if(curFilter==='sdm'){f=f.filter(d=>SDM_CATS.includes(d.kategori));if(curKatFilter!=='semua')f=f.filter(d=>d.kategori===curKatFilter)}if(s){const terms=s.split(/\s+/);f=f.filter(d=>{const txt=[d.namaInstansi||'',d.npsn||'',d.namaPIC||'',d.kategori||''].join(' ').toLowerCase();return terms.every(t=>txt.includes(t))})}return f}
 function groupBy(items,key){const g={};items.forEach(d=>{const k=(d[key]||'').trim().toLowerCase();if(!g[k])g[k]={label:(d[key]||'').trim(),entries:[],tipe:d.tipe,npsn:d.npsn||''};if(!g[k].npsn&&d.npsn)g[k].npsn=d.npsn;g[k].entries.push(d)});return Object.values(g)}
@@ -710,9 +711,9 @@ function dlPdfLap(){
     const viewLabel=curView==='instansi'?'Instansi':curView==='pic'?'PIC':'Tabel';
     const filterLabel=curFilter==='semua'?'Semua':curFilter==='posyandu'?'Posyandu':curFilter==='sekolah'?'Sekolah':'SDM/Guru';
 
-    /* Buat elemen sementara untuk PDF */
+    /* Buat elemen sementara untuk PDF - harus visible agar html2canvas bisa render */
     const wrap=document.createElement('div');
-    wrap.style.cssText='position:fixed;left:-9999px;top:0;width:780px;background:#fff;font-family:"Plus Jakarta Sans",sans-serif;color:#1a2e23;padding:0';
+    wrap.style.cssText='position:fixed;left:0;top:0;width:780px;z-index:-9999;background:#fff;font-family:"Plus Jakarta Sans",sans-serif;color:#1a2e23;padding:0;pointer-events:none';
 
     /* Header */
     wrap.innerHTML='<div style="padding:24px 28px 16px;border-bottom:2px solid #10b981">'
@@ -836,7 +837,7 @@ function dlPdfLap(){
         margin:[8,8,8,8],
         filename:'Laporan_MBG_'+new Date().toISOString().slice(0,10)+'.pdf',
         image:{type:'jpeg',quality:0.95},
-        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',width:780},
+        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',width:780,scrollX:0,scrollY:-window.scrollY,ignoreElements:function(el){return el===wrap}},
         jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
         pagebreak:{mode:['avoid-all','css','legacy']}
     }).from(wrap).save().then(()=>{
