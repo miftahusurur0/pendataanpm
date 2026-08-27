@@ -519,6 +519,8 @@
         <div class="stat-card" data-color="blue"><div class="s-icon icon-blue"><i class="fas fa-school"></i></div><div class="s-val" id="sS">0</div><div class="s-lbl">Sekolah/Ponpes</div></div>
         <div class="stat-card" data-color="purple"><div class="s-icon icon-purple"><i class="fas fa-chalkboard-teacher"></i></div><div class="s-val" id="sG">0</div><div class="s-lbl">SDM/Guru</div></div>
         <div class="stat-card" data-color="rose"><div class="s-icon icon-rose"><i class="fas fa-users"></i></div><div class="s-val" id="sT">0</div><div class="s-lbl">Total Penerima</div></div>
+        <div class="stat-card" data-color="blue"><div class="s-icon icon-blue"><i class="fas fa-drumstick-bite"></i></div><div class="s-val" id="sPB">0</div><div class="s-lbl">Total Porsi Besar</div></div>
+        <div class="stat-card" data-color="amber"><div class="s-icon icon-amber"><i class="fas fa-seedling"></i></div><div class="s-val" id="sPK">0</div><div class="s-lbl">Total Porsi Kecil</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem" class="chart-row">
         <div class="card"><div class="card-hd"><div class="card-tt"><i class="fas fa-chart-bar"></i> Distribusi per Kategori</div></div><div class="card-bd"><canvas id="chKat"></canvas></div></div>
@@ -777,7 +779,7 @@ async function syncData(){if(useGS&&gsUrl){toast('Sinkronisasi...','i');await lo
 function refreshAll(){updateStats();updateCharts();updateRecent();renderRiw()}
 
 /* ==================== STATISTIK ==================== */
-function updateStats(){const iU=[...new Set(data.map(d=>(d.namaInstansi||'').trim().toLowerCase()))].length;const pC=data.filter(d=>d.tipe==='posyandu').length;const sC=data.filter(d=>d.tipe==='sekolah'&&!SDM_CATS.includes(d.kategori)).length;const gC=data.filter(d=>SDM_CATS.includes(d.kategori)).length;const tP=data.reduce((s,d)=>s+(d.jumlahTotal||0),0);anim('sI',iU);anim('sP',pC);anim('sS',sC);anim('sG',gC);anim('sT',tP);if(data.length){const l=data[data.length-1].updatedAt||data[data.length-1].createdAt;document.getElementById('lastUp').textContent='Terakhir: '+new Date(l).toLocaleString('id-ID')}}
+function updateStats(){const iU=[...new Set(data.map(d=>(d.namaInstansi||'').trim().toLowerCase()))].length;const pC=data.filter(d=>d.tipe==='posyandu').length;const sC=data.filter(d=>d.tipe==='sekolah'&&!SDM_CATS.includes(d.kategori)).length;const gC=data.filter(d=>SDM_CATS.includes(d.kategori)).length;const tP=data.reduce((s,d)=>s+(d.jumlahTotal||0),0);const pbT=data.filter(d=>PORSI_BESAR_CATS.includes(d.kategori)).reduce((s,d)=>s+(d.jumlahTotal||0),0);const pkT=data.filter(d=>PORSI_KECIL_CATS.includes(d.kategori)).reduce((s,d)=>s+(d.jumlahTotal||0),0);anim('sI',iU);anim('sP',pC);anim('sS',sC);anim('sG',gC);anim('sT',tP);anim('sPB',pbT);anim('sPK',pkT);if(data.length){const l=data[data.length-1].updatedAt||data[data.length-1].createdAt;document.getElementById('lastUp').textContent='Terakhir: '+new Date(l).toLocaleString('id-ID')}}
 function anim(id,tgt){const el=document.getElementById(id);if(!el)return;const c=parseInt(el.textContent.replace(/\./g,''))||0;if(c===tgt){el.textContent=tgt.toLocaleString('id-ID');return}const dur=300,st=performance.now();(function step(now){const p=Math.min((now-st)/dur,1);el.textContent=Math.round(c+(tgt-c)*(1-Math.pow(1-p,3))).toLocaleString('id-ID');if(p<1)requestAnimationFrame(step)})(st)}
 
 /* ==================== CHARTS ==================== */
