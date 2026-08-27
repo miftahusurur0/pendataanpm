@@ -119,6 +119,78 @@
         .form-input::placeholder{color:#9ca3af}
         .form-select option{background:#fff;color:var(--fg)}
         .form-select optgroup{font-weight:700;color:var(--fg2)}
+        .field-row-2{display:grid;grid-template-columns:1fr 1fr;gap:0 .9rem}
+        .field-ic{position:relative}
+        .field-ic input{padding-left:2.6rem}
+        .field-ic i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.82rem;transition:.25s;pointer-events:none}
+        .field-ic input:focus+i,.field-ic:focus-within i{color:var(--accent)}
+
+        /* ===== FORM SECTIONS (TAMBAH DATA) ===== */
+        .form-section{margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:1px dashed rgba(0,0,0,.08)}
+        .form-section:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:.9rem}
+        .form-section-hd{display:flex;align-items:flex-start;gap:.65rem;margin-bottom:1rem}
+        .fs-num{width:24px;height:24px;border-radius:8px;background:var(--grad-green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;box-shadow:0 2px 8px rgba(16,185,129,.28);margin-top:.1rem}
+        .fs-txt{flex:1;min-width:0}
+        .fs-title{font-size:.87rem;font-weight:800;color:var(--fg);line-height:1.3}
+        .fs-desc{font-size:.72rem;color:var(--muted);margin-top:.1rem;line-height:1.4}
+
+        /* ===== TIPE CARD (pilih tipe instansi) ===== */
+        .tipe-card-group{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+        .tipe-card{display:flex;align-items:center;gap:.65rem;padding:.75rem .85rem;border-radius:14px;border:1.5px solid rgba(0,0,0,.08);background:rgba(255,255,255,.6);backdrop-filter:blur(6px);cursor:pointer;text-align:left;font-family:inherit;transition:.25s cubic-bezier(.4,0,.2,1)}
+        .tipe-card:hover{border-color:rgba(16,185,129,.4);background:rgba(255,255,255,.85);transform:translateY(-1px)}
+        .tipe-card .tc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;flex-shrink:0;background:var(--grad-amber);box-shadow:0 3px 10px rgba(245,158,11,.28);transition:.25s}
+        .tipe-card[data-tipe="sekolah"] .tc-icon{background:var(--grad-blue);box-shadow:0 3px 10px rgba(59,130,246,.28)}
+        .tipe-card .tc-txt{min-width:0}
+        .tipe-card .tc-title{font-size:.82rem;font-weight:700;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .tipe-card .tc-desc{font-size:.68rem;color:var(--muted);margin-top:.05rem}
+        .tipe-card.active{border-color:transparent;background:linear-gradient(135deg,var(--accent-l),#d1fae5);box-shadow:0 4px 16px rgba(16,185,129,.18)}
+        .tipe-card.active .tc-title{color:var(--accent2)}
+
+        /* ===== KATEGORI PILLS ===== */
+        .kat-group-block{margin-bottom:.75rem}
+        .kat-group-block:last-child{margin-bottom:0}
+        .kat-group-lbl{display:flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
+        .kat-pill-wrap{display:flex;flex-wrap:wrap;gap:.4rem}
+        .kat-pill{padding:.38rem .8rem;border-radius:50px;border:1.5px solid rgba(0,0,0,.08);background:rgba(255,255,255,.6);color:var(--fg2);font-family:inherit;font-size:.74rem;font-weight:600;cursor:pointer;transition:.22s cubic-bezier(.4,0,.2,1)}
+        .kat-pill:hover{border-color:var(--accent);color:var(--fg);background:rgba(255,255,255,.85);transform:translateY(-1px)}
+        .kat-pill.active{background:var(--grad-green);border-color:transparent;color:#fff;box-shadow:0 2px 10px rgba(16,185,129,.3)}
+        .kat-empty-hint{font-size:.78rem;color:var(--muted);padding:.5rem 0}
+
+        /* ===== JUMLAH PER KATEGORI (kartu) ===== */
+        .jml-item{padding:.7rem .85rem;background:rgba(255,255,255,.6);backdrop-filter:blur(6px);border:1px solid rgba(0,0,0,.07);border-radius:12px;margin-bottom:.5rem;transition:.2s}
+        .jml-item:last-child{margin-bottom:0}
+        .jml-item:hover{border-color:rgba(16,185,129,.3);background:rgba(255,255,255,.85)}
+        .jml-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.55rem}
+        .jml-name{font-size:.8rem;font-weight:700;color:var(--fg)}
+        .jml-inputs{display:flex;align-items:flex-end;gap:.5rem;flex-wrap:wrap}
+        .jml-field{flex:1 1 90px;min-width:80px}
+        .jml-field label{display:block;font-size:.63rem;font-weight:700;color:var(--muted);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.02em}
+        .jml-field .form-input{padding:.5rem .7rem}
+        .jml-plus{padding-bottom:.6rem;color:var(--muted);font-weight:700;font-size:.85rem;flex-shrink:0}
+
+        /* ===== RINGKASAN TOTAL ===== */
+        .form-summary{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;background:linear-gradient(135deg,rgba(16,185,129,.09),rgba(52,211,153,.05));border:1px solid rgba(16,185,129,.18);border-radius:14px;margin-bottom:1rem}
+        .fsum-icon{width:38px;height:38px;border-radius:10px;background:var(--grad-green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;box-shadow:0 3px 10px rgba(16,185,129,.3)}
+        .fsum-lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+        .fsum-val{font-size:1.15rem;font-weight:800;color:var(--accent2);line-height:1.25}
+
+        /* ===== FORM ACTIONS ===== */
+        .form-actions{display:flex;gap:.6rem;padding-top:.3rem}
+        .form-actions .btn-p{flex:1}
+
+        /* ===== RIWAYAT INPUT ITEM ===== */
+        .riwayat-item{display:flex;align-items:center;gap:.65rem;padding:.65rem .9rem;border-bottom:1px solid var(--border-l)}
+        .riwayat-item:last-child{border-bottom:none}
+        .riwayat-item:hover{background:rgba(16,185,129,.05)}
+        .ri-avatar{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.82rem;flex-shrink:0}
+        .ri-avatar.pos{background:var(--grad-amber);box-shadow:0 2px 8px rgba(245,158,11,.28)}
+        .ri-avatar.sek{background:var(--grad-blue);box-shadow:0 2px 8px rgba(59,130,246,.28)}
+        .ri-avatar.sdm{background:var(--grad-purple);box-shadow:0 2px 8px rgba(139,92,246,.28)}
+        .ri-body{flex:1;min-width:0}
+        .ri-name{font-weight:700;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .ri-meta{font-size:.68rem;color:var(--muted);margin-top:.15rem;display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
+        .ri-val{font-weight:800;font-size:.84rem;color:var(--accent2);flex-shrink:0}
+        .ri-actions{display:flex;gap:.2rem;flex-shrink:0}
 
         /* ===== TOGGLE GROUP ===== */
         .tg-group{display:flex;gap:.4rem}
@@ -256,7 +328,16 @@
         .step-box a:hover{border-bottom-style:solid}
 
         @media(max-width:900px){.chart-row,.recent-row,.form-grid{grid-template-columns:1fr!important}.rekap-doc{padding:1.25rem}}
-        @media(max-width:640px){.page-ct{padding:1rem}.gender-row{flex-direction:column}.g-sep{display:none}.rekap-doc{padding:1rem}.rekap-tb th,.rekap-tb td{padding:.45rem .5rem;font-size:.78rem}}
+        @media(max-width:640px){.page-ct{padding:1rem}.gender-row{flex-direction:column}.g-sep{display:none}.rekap-doc{padding:1rem}.rekap-tb th,.rekap-tb td{padding:.45rem .5rem;font-size:.78rem}
+            .card-hd{padding:.85rem 1rem}.card-bd{padding:1rem}
+            .field-row-2{grid-template-columns:1fr;gap:0}
+        }
+        @media(max-width:480px){
+            .tipe-card-group{grid-template-columns:1fr}
+            .tipe-card .tc-desc{display:none}
+            .jml-field{flex:1 1 45%}
+            .form-actions{flex-direction:column-reverse}
+        }
         @media print{
             .sidebar,.topbar,.no-print{display:none!important}
             .main-area{margin-left:0!important}
@@ -269,6 +350,130 @@
             .rekap-tb .subtotal td{background:#f0fdf4!important;color:#059669!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
             .rekap-tb .grand-total td{background:#10b981!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
         }
+    
+        /* ===== TRANSISI HALUS — tombol & input ===== */
+        .btn,.btn-p,.btn-o,.btn-d,.btn-sm,.btn-icon,
+        .tg-btn,.tipe-btn,.kat-chip,.filter-tab,.view-btn,
+        .side-link,.hamburger,.btn-gear,
+        .form-input,.form-select,
+        .stat-card,.card,.kat-row,.riwayat-item,
+        .mode-seg .tg-btn{
+            transition:
+                background .25s cubic-bezier(.4,0,.2,1),
+                background-color .25s cubic-bezier(.4,0,.2,1),
+                border-color .25s cubic-bezier(.4,0,.2,1),
+                color .25s cubic-bezier(.4,0,.2,1),
+                box-shadow .25s cubic-bezier(.4,0,.2,1),
+                transform .25s cubic-bezier(.4,0,.2,1),
+                opacity .25s cubic-bezier(.4,0,.2,1),
+                filter .25s cubic-bezier(.4,0,.2,1);
+        }
+        .form-input,.form-select{
+            transition:
+                border-color .25s cubic-bezier(.4,0,.2,1),
+                box-shadow .3s cubic-bezier(.4,0,.2,1),
+                background .25s cubic-bezier(.4,0,.2,1),
+                transform .2s cubic-bezier(.4,0,.2,1);
+        }
+        .form-input:hover{
+            border-color:rgba(16,185,129,.4);
+            background:rgba(255,255,255,.95);
+        }
+        .form-input:focus,.form-select:focus{
+            border-color:var(--accent);
+            box-shadow:0 0 0 4px var(--accent-gl),0 4px 16px rgba(16,185,129,.08);
+            background:#fff;
+            transform:translateY(-1px);
+        }
+        .btn:active,.btn-p:active,.btn-o:active,.btn-d:active,
+        .tipe-btn:active,.kat-chip:active,.tg-btn:active,
+        .tipe-card:active,.kat-pill:active{
+            transform:scale(.97);
+            transition-duration:.1s;
+        }
+        .btn-p:hover{
+            transform:translateY(-2px) scale(1.02);
+            box-shadow:0 6px 20px rgba(16,185,129,.4);
+        }
+        .btn-o:hover{
+            transform:translateY(-1px);
+            box-shadow:0 4px 12px rgba(0,0,0,.06);
+        }
+        .btn-d:hover{
+            transform:translateY(-1px);
+            box-shadow:0 4px 12px rgba(239,68,68,.15);
+        }
+        .tipe-btn{
+            transition:all .28s cubic-bezier(.4,0,.2,1);
+        }
+        .tipe-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 6px 16px rgba(0,0,0,.06);
+        }
+        .tipe-btn.active{
+            transform:translateY(0);
+        }
+        .kat-chip{
+            transition:all .22s cubic-bezier(.4,0,.2,1);
+        }
+        .kat-chip:hover{
+            transform:translateY(-1px);
+            box-shadow:0 3px 10px rgba(0,0,0,.06);
+        }
+        .kat-chip.active{
+            transform:scale(1.03);
+        }
+        .kat-chip.active:hover{
+            transform:scale(1.04) translateY(-1px);
+            box-shadow:0 4px 14px rgba(16,185,129,.35);
+        }
+        .side-link{
+            transition:color .22s cubic-bezier(.4,0,.2,1),
+                        background .22s cubic-bezier(.4,0,.2,1),
+                        border-left-color .22s cubic-bezier(.4,0,.2,1),
+                        transform .22s cubic-bezier(.4,0,.2,1),
+                        box-shadow .22s cubic-bezier(.4,0,.2,1);
+        }
+        .side-link:hover{
+            transform:translateX(2px);
+        }
+        .side-link.active{
+            transform:translateX(0);
+        }
+        .stat-card{
+            transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s cubic-bezier(.4,0,.2,1);
+        }
+        .filter-tab:hover,.view-btn:hover{
+            transform:translateY(-1px);
+        }
+        .filter-tab.active,.view-btn.active{
+            transform:none;
+        }
+        .hamburger,.btn-gear,.btn-icon{
+            transition:all .22s cubic-bezier(.4,0,.2,1);
+        }
+        .hamburger:hover,.btn-gear:hover,.btn-icon:hover{
+            transform:scale(1.08);
+        }
+        .hamburger:active,.btn-gear:active,.btn-icon:active{
+            transform:scale(.94);
+        }
+        /* Fokus keyboard yang lembut */
+        .btn:focus-visible,.form-input:focus-visible,.tipe-btn:focus-visible,.kat-chip:focus-visible,
+        .tipe-card:focus-visible,.kat-pill:focus-visible{
+            outline:none;
+            box-shadow:0 0 0 3px rgba(16,185,129,.35);
+        }
+        @media (prefers-reduced-motion:reduce){
+            .btn,.btn-p,.btn-o,.btn-d,.tg-btn,.tipe-btn,.kat-chip,.form-input,.form-select,
+            .side-link,.stat-card,.filter-tab,.view-btn,.hamburger,.btn-gear,.btn-icon,.kat-row,
+            .tipe-card,.kat-pill,.jml-item{
+                transition:none!important;
+                transform:none!important;
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -339,30 +544,67 @@
             <div class="card-bd">
                 <div id="dupH" class="dup-hint" style="display:none"><i class="fas fa-exclamation-circle"></i><span id="dupT"></span></div>
                 <form id="mbgForm" onsubmit="handleSubmit(event)">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 .9rem">
-                        <div class="form-group"><label class="form-label">Nama Instansi *</label><input type="text" class="form-input" id="fIns" placeholder="Nama posyandu/sekolah/ponpes" required oninput="chkDup()"></div>
-                        <div class="form-group"><label class="form-label">NPSN <span class="opt">(boleh kosong)</span></label><input type="text" class="form-input" id="fNPSN" placeholder="Opsional"></div>
-                    </div>
-                    <div class="form-group"><label class="form-label">Nama PIC *</label><input type="text" class="form-input" id="fPIC" placeholder="Penanggung jawab" required oninput="chkDup()"></div>
-                    <div class="form-group"><label class="form-label">Tipe Instansi * <span class="opt">(bisa pilih lebih dari satu)</span></label>
-                        <div class="tg-group">
-                            <button type="button" class="tg-btn active" data-tipe="posyandu" onclick="toggleTipe('posyandu')"><i class="fas fa-baby" style="margin-right:.2rem"></i>Posyandu</button>
-                            <button type="button" class="tg-btn" data-tipe="sekolah" onclick="toggleTipe('sekolah')"><i class="fas fa-school" style="margin-right:.2rem"></i>Sekolah/Ponpes</button>
+
+                    <div class="form-section">
+                        <div class="form-section-hd">
+                            <div class="fs-num">1</div>
+                            <div class="fs-txt"><div class="fs-title">Informasi Instansi</div><div class="fs-desc">Data dasar posyandu, sekolah, atau ponpes penerima</div></div>
+                        </div>
+                        <div class="field-row-2">
+                            <div class="form-group"><label class="form-label">Nama Instansi *</label>
+                                <div class="field-ic"><input type="text" class="form-input" id="fIns" placeholder="Nama posyandu/sekolah/ponpes" required oninput="chkDup()"><i class="fas fa-building"></i></div>
+                            </div>
+                            <div class="form-group"><label class="form-label">NPSN <span class="opt">(boleh kosong)</span></label>
+                                <div class="field-ic"><input type="text" class="form-input" id="fNPSN" placeholder="Opsional"><i class="fas fa-id-card"></i></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0"><label class="form-label">Nama PIC *</label>
+                            <div class="field-ic"><input type="text" class="form-input" id="fPIC" placeholder="Penanggung jawab" required oninput="chkDup()"><i class="fas fa-user"></i></div>
                         </div>
                     </div>
-                    <div class="form-group"><label class="form-label">Kategori * <span class="opt">(centang beberapa sekaligus)</span></label>
-                        <div id="katChips" style="display:flex;flex-direction:column;gap:.5rem"></div>
-                    </div>
-                    <div class="form-group"><label class="form-label">Mode Jumlah</label>
-                        <div style="display:flex;gap:.35rem">
-                            <button type="button" class="tg-btn active" id="mD" onclick="setMode('detail')" style="flex:1;padding:.4rem;font-size:.78rem">L / P</button>
-                            <button type="button" class="tg-btn" id="mT" onclick="setMode('total')" style="flex:1;padding:.4rem;font-size:.78rem">Total</button>
+
+                    <div class="form-section">
+                        <div class="form-section-hd">
+                            <div class="fs-num">2</div>
+                            <div class="fs-txt"><div class="fs-title">Tipe & Kategori</div><div class="fs-desc">Bisa pilih lebih dari satu tipe, lalu centang kategorinya</div></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="tipe-card-group">
+                                <button type="button" class="tipe-card active" data-tipe="posyandu" onclick="toggleTipe('posyandu')">
+                                    <div class="tc-icon"><i class="fas fa-baby"></i></div>
+                                    <div class="tc-txt"><div class="tc-title">Posyandu</div><div class="tc-desc">Bumil, busui, balita</div></div>
+                                </button>
+                                <button type="button" class="tipe-card" data-tipe="sekolah" onclick="toggleTipe('sekolah')">
+                                    <div class="tc-icon"><i class="fas fa-school"></i></div>
+                                    <div class="tc-txt"><div class="tc-title">Sekolah/Ponpes</div><div class="tc-desc">Siswa, guru, tendik</div></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0"><label class="form-label">Kategori *</label>
+                            <div id="katChips"></div>
                         </div>
                     </div>
-                    <div class="form-group"><label class="form-label">Jumlah per Kategori *</label>
-                        <div id="katRows"></div>
+
+                    <div class="form-section">
+                        <div class="form-section-hd">
+                            <div class="fs-num">3</div>
+                            <div class="fs-txt"><div class="fs-title">Jumlah Penerima</div><div class="fs-desc">Isi jumlah tiap kategori yang dipilih di atas</div></div>
+                        </div>
+                        <div class="form-group">
+                            <div style="display:flex;gap:.35rem">
+                                <button type="button" class="tg-btn active" id="mD" onclick="setMode('detail')" style="flex:1;padding:.45rem;font-size:.78rem"><i class="fas fa-venus-mars" style="margin-right:.25rem"></i>L / P</button>
+                                <button type="button" class="tg-btn" id="mT" onclick="setMode('total')" style="flex:1;padding:.45rem;font-size:.78rem"><i class="fas fa-hashtag" style="margin-right:.25rem"></i>Total</button>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0"><div id="katRows"></div></div>
                     </div>
-                    <div style="display:flex;gap:.6rem;margin-top:.4rem"><button type="submit" class="btn btn-p" id="btnSub"><i class="fas fa-save"></i> Simpan Semua</button></div>
+
+                    <div class="form-summary" id="formSummary" style="display:none">
+                        <div class="fsum-icon"><i class="fas fa-users"></i></div>
+                        <div><div class="fsum-lbl">Total Keseluruhan</div><div class="fsum-val" id="fsumVal">0</div></div>
+                    </div>
+
+                    <div class="form-actions"><button type="submit" class="btn btn-p" id="btnSub"><i class="fas fa-save"></i> Simpan Semua</button></div>
                     <input type="hidden" id="fEditId"><input type="hidden" id="fGroupId"><input type="hidden" id="fModeV" value="detail">
                 </form>
             </div>
@@ -462,592 +704,17 @@
     </div>
     <div id="gsStatus" style="margin-bottom:1rem"></div>
     <div style="margin-bottom:1rem">
-        
-        <div style="margin-top:.75rem;padding-top:.75rem;border-top:1px solid rgba(0,0,0,.06)">
-            <div style="font-size:.78rem;font-weight:600;margin-bottom:.45rem;color:var(--fg2)"><i class="fas fa-file-import" style="color:var(--accent)"></i> Impor dari sheet lama</div>
-            <p style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem;line-height:1.45">Ambil data dari sheet lain di spreadsheet yang sama (header fleksibel). Data dengan id yang sudah ada dilewati.</p>
-            <button type="button" class="btn btn-o" style="width:100%;justify-content:center" onclick="migrateSheets()"><i class="fas fa-download"></i> Impor Sheet Lama ke Data PM</button>
-        </div>
-<h3 style="font-size:.9rem;font-weight:700;margin-bottom:.6rem">Langkah Setup:</h3>
-        <div class="step-box"><strong>1.</strong> Buka <a href="https://docs.google.com/spreadsheets/create" target="_blank" style="color:var(--accent2);font-weight:600">Google Sheets</a>, buat Spreadsheet baru (boleh kosong — kolom dibuat otomatis)</div>
-        <div class="step-box"><strong>2.</strong> Di dalam Spreadsheet (WAJIB dari dalam Sheet), klik <strong>Extensions → Apps Script</strong>, hapus kode default, paste kode di bawah, lalu <strong>Simpan</strong></div>
-        <div class="step-box"><strong>3.</strong> (Opsional) Di menu spreadsheet: <strong>🍽️ Sistem MBG → Inisialisasi</strong> — otomatis rename file jadi <code>Pendataan PM</code>, buat sheet <code>Data PM</code> + semua kolom header</div>
-        <div class="step-box"><strong>4.</strong> Jika ada data di sheet lama: menu <strong>🍽️ Sistem MBG → Impor data dari sheet lain</strong></div>
-        <div class="step-box"><strong>5.</strong> <strong>Deploy → New deployment → Web app</strong>. <em>Execute as</em>: <strong>Me</strong>, <em>Who has access</em>: <strong>Anyone</strong> (wajib)</div>
-        <div class="step-box"><strong>6.</strong> Salin <strong>URL Web App</strong> (akhiran <code>/exec</code>), tempel di kolom bawah → Test → Hubungkan</div>
+        <h3 style="font-size:.9rem;font-weight:700;margin-bottom:.6rem">Langkah Setup:</h3>
+        <div class="step-box"><strong>1.</strong> Buka <a href="https://docs.google.com/spreadsheets/create" target="_blank" style="color:var(--accent2);font-weight:600">Google Sheets</a>, buat Spreadsheet baru</div>
+        <div class="step-box"><strong>2.</strong> Buat header di baris pertama:<br><code>id | namaInstansi | npsn | namaPIC | tipe | kategori | jumlahL | jumlahP | jumlahTotal | createdAt | updatedAt | groupId</code></div>
+        <div class="step-box"><strong>3.</strong> Di dalam Spreadsheet itu (WAJIB dari dalam Sheet, bukan buka script.google.com terpisah), klik <strong>Extensions → Apps Script</strong>, hapus kode default, paste kode di bawah, lalu klik ikon Simpan</div>
+        <div class="step-box"><strong>4.</strong> Klik <strong>Deploy → New deployment</strong> → pilih tipe <strong>Web app</strong>. Isi <em>Execute as</em>: <strong>Me</strong>, dan <em>Who has access</em> WAJIB <strong>Anyone</strong> (bukan "Anyone with Google account") — ini penyebab paling umum website gagal terhubung</div>
+        <div class="step-box"><strong>5.</strong> Klik <strong>Deploy</strong>, izinkan akses (Authorize access), lalu salin <strong>URL Web App</strong> (diakhiri <code>/exec</code>) dan tempel di kolom bawah</div>
         <div class="step-box"><strong>Catatan:</strong> Setiap kali kode Apps Script diubah, ulangi Deploy → <strong>Manage deployments</strong> → ikon pensil → <strong>New version</strong> → Deploy, agar perubahan aktif</div>
     </div>
     <div style="margin-bottom:1rem">
         <label class="form-label">Kode Apps Script:</label>
-        <textarea id="gsCode" readonly style="width:100%;height:120px;padding:.8rem 1rem;background:linear-gradient(135deg,#1a1d23,#252830);color:#a5f3fc;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-family:'Fira Code',monospace;font-size:.7rem;line-height:1.5;resize:vertical;outline:none">/* =========================================================
-   Sistem Pendataan Penerima MBG — Backend Google Apps Script
-   Cocok dengan index.html (UI agregat)
-
-   FITUR:
-   - Spreadsheet otomatis dinamai "Pendataan PM" (saat inisialisasi)
-   - Sheet "Data PM" + header kolom dibuat otomatis
-   - Migrasi data dari sheet lama di spreadsheet yang sama
-   - API: GET load | POST save, saveBatch, delete, clear, migrate
-
-   DEPLOY:
-   1. Buat Google Spreadsheet baru (boleh kosong)
-   2. Extensions → Apps Script → paste file ini → Simpan
-   3. Jalankan sekali menu: 🍽️ Sistem MBG → Inisialisasi
-      (atau biarkan otomatis saat request pertama dari UI)
-   4. Deploy → New deployment → Web app
-      Execute as: Me | Who has access: Anyone
-   5. Salin URL /exec → tempel di Pengaturan UI → Test → Hubungkan
-   ========================================================= */
-
-var SPREADSHEET_NAME = 'Pendataan PM';
-var SHEET_NAME = 'Data PM';
-var HEADERS = [
-  'id', 'namaInstansi', 'npsn', 'namaPIC', 'tipe', 'kategori',
-  'jumlahL', 'jumlahP', 'jumlahTotal', 'createdAt', 'updatedAt', 'groupId'
-];
-
-/* Alias header lama → standar (untuk migrasi) */
-var HEADER_ALIASES = {
-  id: ['id', 'ID', 'Id'],
-  namaInstansi: ['namaInstansi', 'Nama Instansi', 'Instansi', 'instansi', 'nama_instansi'],
-  npsn: ['npsn', 'NPSN', 'Npsn'],
-  namaPIC: ['namaPIC', 'Nama PIC', 'PIC', 'pic', 'nama_pic'],
-  tipe: ['tipe', 'Tipe', 'Tipe Instansi', 'jenis'],
-  kategori: ['kategori', 'Kategori', 'ket', 'Ket'],
-  jumlahL: ['jumlahL', 'Laki-laki', 'L', 'jmlL', 'pria', 'Jumlah L'],
-  jumlahP: ['jumlahP', 'Perempuan', 'P', 'jmlP', 'wanita', 'Jumlah P'],
-  jumlahTotal: ['jumlahTotal', 'Jumlah', 'Total', 'jumlah', 'total'],
-  createdAt: ['createdAt', 'Created At', 'dibuat', 'timestamp', 'Timestamp'],
-  updatedAt: ['updatedAt', 'Updated At', 'diubah'],
-  groupId: ['groupId', 'Group ID', 'group_id', 'grup']
-};
-
-/* ---------- Core sheet / spreadsheet ---------- */
-
-function getSpreadsheet_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (!ss) {
-    throw new Error(
-      'Script tidak terikat ke Spreadsheet. ' +
-      'Buka lewat Extensions → Apps Script dari dalam Google Sheet.'
-    );
-  }
-  return ss;
-}
-
-/** Pastikan nama file spreadsheet = Pendataan PM */
-function ensureSpreadsheetName_() {
-  var ss = getSpreadsheet_();
-  try {
-    if (ss.getName() !== SPREADSHEET_NAME) {
-      ss.rename(SPREADSHEET_NAME);
-    }
-  } catch (e) {
-    // Rename gagal (izin) — lanjut saja
-  }
-  return ss;
-}
-
-function getOrCreateSheet_() {
-  var ss = ensureSpreadsheetName_();
-  var sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-  }
-  ensureHeaders_(sheet);
-  return sheet;
-}
-
-function ensureHeaders_(sheet) {
-  var lastRow = sheet.getLastRow();
-  var lastCol = Math.max(sheet.getLastColumn(), 1);
-
-  if (lastRow === 0) {
-    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
-    styleHeader_(sheet);
-    return true; // created
-  }
-
-  var current = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  var first = String(current[0] || '').trim().toLowerCase();
-
-  // Sudah pakai header standar?
-  if (first === 'id' && lastCol >= HEADERS.length) {
-    var ok = true;
-    for (var i = 0; i < HEADERS.length; i++) {
-      if (String(current[i] || '').trim() !== HEADERS[i]) {
-        ok = false;
-        break;
-      }
-    }
-    if (ok) return false;
-  }
-
-  // Header hilang / format lama: tulis header di baris 1 jika kosong,
-  // atau pastikan kolom lengkap tanpa menimpa data.
-  if (first === '' || first === 'id') {
-    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
-    styleHeader_(sheet);
-    return true;
-  }
-
-  // Baris 1 bukan header id — sisipkan baris header di atas
-  sheet.insertRowBefore(1);
-  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
-  styleHeader_(sheet);
-  return true;
-}
-
-function styleHeader_(sheet) {
-  var range = sheet.getRange(1, 1, 1, HEADERS.length);
-  range.setFontWeight('bold')
-    .setBackground('#10b981')
-    .setFontColor('#ffffff')
-    .setHorizontalAlignment('center');
-  sheet.setFrozenRows(1);
-  var widths = [90, 220, 100, 140, 90, 160, 80, 80, 100, 170, 170, 110];
-  for (var i = 0; i < widths.length; i++) {
-    sheet.setColumnWidth(i + 1, widths[i]);
-  }
-}
-
-function jsonOut_(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function parseBody_(e) {
-  if (!e || !e.postData || !e.postData.contents) {
-    throw new Error('Body request kosong');
-  }
-  try {
-    return JSON.parse(e.postData.contents);
-  } catch (err) {
-    throw new Error('JSON tidak valid: ' + err);
-  }
-}
-
-function readAllRows_(sheet) {
-  var lastRow = sheet.getLastRow();
-  if (lastRow < 2) return [];
-  var lastCol = Math.max(sheet.getLastColumn(), HEADERS.length);
-  var values = sheet.getRange(1, 1, lastRow, lastCol).getValues();
-  var header = values[0].map(function (h) { return String(h || '').trim(); });
-  var rows = [];
-  for (var i = 1; i < values.length; i++) {
-    var row = values[i];
-    var idIdx = header.indexOf('id');
-    var id = idIdx >= 0 ? row[idIdx] : row[0];
-    if (id === '' || id === null || id === undefined) continue;
-    var obj = {};
-    for (var c = 0; c < HEADERS.length; c++) {
-      var key = HEADERS[c];
-      var idx = header.indexOf(key);
-      var val = idx >= 0 ? row[idx] : '';
-      if (key === 'jumlahL' || key === 'jumlahP') {
-        if (val === '' || val === null || val === undefined) obj[key] = null;
-        else obj[key] = Number(val);
-      } else if (key === 'jumlahTotal') {
-        obj[key] = Number(val) || 0;
-      } else {
-        obj[key] = val === null || val === undefined ? '' : String(val);
-      }
-    }
-    rows.push(obj);
-  }
-  return rows;
-}
-
-function rowFromObject_(data) {
-  return HEADERS.map(function (key) {
-    if (data[key] === undefined || data[key] === null) {
-      if (key === 'jumlahL' || key === 'jumlahP') return '';
-      if (key === 'jumlahTotal') return 0;
-      return '';
-    }
-    return data[key];
-  });
-}
-
-function findRowById_(sheet, id) {
-  var lastRow = sheet.getLastRow();
-  if (lastRow < 2) return -1;
-  var ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
-  var target = String(id);
-  for (var i = 0; i < ids.length; i++) {
-    if (String(ids[i][0]) === target) return i + 2;
-  }
-  return -1;
-}
-
-function normalizeRow_(data) {
-  data.id = String(data.id || '');
-  data.namaInstansi = String(data.namaInstansi || '').trim();
-  data.npsn = data.npsn != null ? String(data.npsn).trim() : '';
-  data.namaPIC = String(data.namaPIC || '').trim();
-  data.tipe = String(data.tipe || 'posyandu').toLowerCase();
-  data.kategori = String(data.kategori || '').trim();
-  if (data.jumlahL === '' || data.jumlahL === null || data.jumlahL === undefined) {
-    data.jumlahL = null;
-  } else {
-    data.jumlahL = Number(data.jumlahL) || 0;
-  }
-  if (data.jumlahP === '' || data.jumlahP === null || data.jumlahP === undefined) {
-    data.jumlahP = null;
-  } else {
-    data.jumlahP = Number(data.jumlahP) || 0;
-  }
-  data.jumlahTotal = Number(data.jumlahTotal) || 0;
-  if (data.jumlahL !== null && data.jumlahP !== null && !data.jumlahTotal) {
-    data.jumlahTotal = data.jumlahL + data.jumlahP;
-  }
-  data.createdAt = data.createdAt || new Date().toISOString();
-  data.updatedAt = new Date().toISOString();
-  data.groupId = data.groupId != null ? String(data.groupId) : '';
-}
-
-/* ---------- Migrasi dari sheet lain ---------- */
-
-function mapHeaderIndex_(headerRow) {
-  var map = {};
-  var lower = headerRow.map(function (h) { return String(h || '').trim(); });
-  for (var key in HEADER_ALIASES) {
-    if (!HEADER_ALIASES.hasOwnProperty(key)) continue;
-    var aliases = HEADER_ALIASES[key];
-    map[key] = -1;
-    for (var a = 0; a < aliases.length; a++) {
-      var idx = lower.indexOf(aliases[a]);
-      if (idx === -1) {
-        // case-insensitive
-        for (var j = 0; j < lower.length; j++) {
-          if (String(lower[j]).toLowerCase() === String(aliases[a]).toLowerCase()) {
-            idx = j;
-            break;
-          }
-        }
-      }
-      if (idx !== -1) {
-        map[key] = idx;
-        break;
-      }
-    }
-  }
-  return map;
-}
-
-function sheetLooksLikeData_(sheet) {
-  if (!sheet || sheet.getLastRow() < 1) return false;
-  var cols = Math.min(sheet.getLastColumn(), 20);
-  if (cols < 2) return false;
-  var header = sheet.getRange(1, 1, 1, cols).getValues()[0];
-  var map = mapHeaderIndex_(header);
-  // Minimal punya instansi atau kategori atau id
-  return map.id >= 0 || map.namaInstansi >= 0 || map.kategori >= 0;
-}
-
-/**
- * Ambil data dari semua sheet lain di spreadsheet ini,
- * map ke format standar, tulis ke Data PM (skip id yang sudah ada).
- * @param {string=} sourceSheetName - opsional: hanya 1 sheet sumber
- */
-function migrateFromPreviousSheets_(sourceSheetName) {
-  var ss = ensureSpreadsheetName_();
-  var target = getOrCreateSheet_();
-  var existing = readAllRows_(target);
-  var existingIds = {};
-  existing.forEach(function (r) { existingIds[String(r.id)] = true; });
-
-  var sheets = ss.getSheets();
-  var imported = 0;
-  var skipped = 0;
-  var sources = [];
-
-  for (var s = 0; s < sheets.length; s++) {
-    var sh = sheets[s];
-    if (sh.getName() === SHEET_NAME) continue;
-    if (sourceSheetName && sh.getName() !== sourceSheetName) continue;
-    if (!sheetLooksLikeData_(sh)) continue;
-
-    var lastRow = sh.getLastRow();
-    var lastCol = sh.getLastColumn();
-    if (lastRow < 2 || lastCol < 1) continue;
-
-    var values = sh.getRange(1, 1, lastRow, lastCol).getValues();
-    var map = mapHeaderIndex_(values[0]);
-    var batch = [];
-
-    for (var i = 1; i < values.length; i++) {
-      var row = values[i];
-      function cell(key) {
-        var idx = map[key];
-        return idx >= 0 ? row[idx] : '';
-      }
-
-      var id = String(cell('id') || '').trim();
-      if (!id) {
-        id = 'mig_' + Utilities.getUuid().replace(/-/g, '').slice(0, 10);
-      }
-      if (existingIds[id]) {
-        skipped++;
-        continue;
-      }
-
-      var jL = cell('jumlahL');
-      var jP = cell('jumlahP');
-      var jT = cell('jumlahTotal');
-      var obj = {
-        id: id,
-        namaInstansi: String(cell('namaInstansi') || '').trim(),
-        npsn: String(cell('npsn') || '').trim(),
-        namaPIC: String(cell('namaPIC') || '').trim(),
-        tipe: String(cell('tipe') || 'posyandu').toLowerCase() || 'posyandu',
-        kategori: String(cell('kategori') || '').trim(),
-        jumlahL: jL === '' || jL === null ? null : Number(jL) || 0,
-        jumlahP: jP === '' || jP === null ? null : Number(jP) || 0,
-        jumlahTotal: Number(jT) || 0,
-        createdAt: String(cell('createdAt') || new Date().toISOString()),
-        updatedAt: String(cell('updatedAt') || new Date().toISOString()),
-        groupId: String(cell('groupId') || '')
-      };
-      if (!obj.namaInstansi && !obj.kategori) continue;
-      if (!obj.jumlahTotal && obj.jumlahL !== null && obj.jumlahP !== null) {
-        obj.jumlahTotal = (obj.jumlahL || 0) + (obj.jumlahP || 0);
-      }
-      if (!obj.jumlahTotal) continue;
-
-      normalizeRow_(obj);
-      batch.push(rowFromObject_(obj));
-      existingIds[id] = true;
-      imported++;
-    }
-
-    if (batch.length) {
-      target.getRange(target.getLastRow() + 1, 1, batch.length, HEADERS.length).setValues(batch);
-      sources.push(sh.getName() + ' (' + batch.length + ')');
-    }
-  }
-
-  SpreadsheetApp.flush();
-  return {
-    status: 'success',
-    imported: imported,
-    skipped: skipped,
-    sources: sources,
-    message: imported
-      ? ('Berhasil impor ' + imported + ' baris dari: ' + sources.join(', '))
-      : 'Tidak ada data baru yang bisa diimpor dari sheet lain.'
-  };
-}
-
-/** Daftar sheet yang bisa dimigrasi (untuk UI / menu) */
-function listMigratableSheets_() {
-  var ss = getSpreadsheet_();
-  var list = [];
-  ss.getSheets().forEach(function (sh) {
-    if (sh.getName() === SHEET_NAME) return;
-    if (sheetLooksLikeData_(sh)) {
-      list.push({
-        name: sh.getName(),
-        rows: Math.max(0, sh.getLastRow() - 1)
-      });
-    }
-  });
-  return list;
-}
-
-/* ---------- HTTP ---------- */
-
-function doGet(e) {
-  try {
-    var sheet = getOrCreateSheet_();
-    var data = readAllRows_(sheet);
-    return jsonOut_({
-      status: 'success',
-      data: data,
-      count: data.length,
-      spreadsheet: getSpreadsheet_().getName(),
-      sheet: SHEET_NAME
-    });
-  } catch (err) {
-    return jsonOut_({ status: 'error', message: String(err) });
-  }
-}
-
-function doPost(e) {
-  try {
-    var body = parseBody_(e);
-    var action = body.action;
-    var sheet = getOrCreateSheet_();
-
-    switch (action) {
-      case 'save':
-        return handleSave_(sheet, body.data);
-      case 'saveBatch':
-        return handleSaveBatch_(sheet, body);
-      case 'delete':
-        return handleDelete_(sheet, body.id);
-      case 'clear':
-        return handleClear_(sheet);
-      case 'migrate':
-        return jsonOut_(migrateFromPreviousSheets_(body.sourceSheet || ''));
-      case 'listSheets':
-        return jsonOut_({ status: 'success', sheets: listMigratableSheets_() });
-      case 'init':
-        ensureSpreadsheetName_();
-        getOrCreateSheet_();
-        return jsonOut_({
-          status: 'success',
-          message: 'Spreadsheet "' + SPREADSHEET_NAME + '" & sheet "' + SHEET_NAME + '" siap.',
-          spreadsheet: getSpreadsheet_().getName()
-        });
-      default:
-        return jsonOut_({ status: 'error', message: 'Action tidak dikenal: ' + action });
-    }
-  } catch (err) {
-    return jsonOut_({ status: 'error', message: String(err) });
-  }
-}
-
-/* ---------- Actions ---------- */
-
-function handleSave_(sheet, data) {
-  if (!data || !data.id) {
-    return jsonOut_({ status: 'error', message: 'data.id wajib diisi' });
-  }
-  normalizeRow_(data);
-  var rowNum = findRowById_(sheet, data.id);
-  var row = rowFromObject_(data);
-  if (rowNum > 0) {
-    sheet.getRange(rowNum, 1, 1, HEADERS.length).setValues([row]);
-  } else {
-    sheet.appendRow(row);
-  }
-  SpreadsheetApp.flush();
-  return jsonOut_({ status: 'success', id: data.id });
-}
-
-function handleSaveBatch_(sheet, body) {
-  var rows = Array.isArray(body.rows) ? body.rows : [];
-  var removeIds = Array.isArray(body.removeIds) ? body.removeIds : [];
-  var groupId = body.groupId ? String(body.groupId) : '';
-
-  var lastRow = sheet.getLastRow();
-  if (lastRow >= 2) {
-    var all = sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues();
-    var idCol = 0;
-    var groupCol = 11;
-    var toDelete = [];
-    for (var i = all.length - 1; i >= 0; i--) {
-      var rid = String(all[i][idCol] || '');
-      var gid = String(all[i][groupCol] || '');
-      if (removeIds.indexOf(rid) !== -1 || (groupId && gid === groupId)) {
-        toDelete.push(i + 2);
-      }
-    }
-    toDelete.sort(function (a, b) { return b - a; });
-    for (var d = 0; d < toDelete.length; d++) sheet.deleteRow(toDelete[d]);
-  }
-
-  var appended = 0;
-  var updated = 0;
-  for (var r = 0; r < rows.length; r++) {
-    var item = rows[r] || {};
-    if (!item.id) {
-      item.id = Utilities.getUuid().replace(/-/g, '').slice(0, 12);
-    }
-    normalizeRow_(item);
-    var existing = findRowById_(sheet, item.id);
-    var values = rowFromObject_(item);
-    if (existing > 0) {
-      sheet.getRange(existing, 1, 1, HEADERS.length).setValues([values]);
-      updated++;
-    } else {
-      sheet.appendRow(values);
-      appended++;
-    }
-  }
-  SpreadsheetApp.flush();
-  return jsonOut_({
-    status: 'success',
-    count: rows.length,
-    appended: appended,
-    updated: updated
-  });
-}
-
-function handleDelete_(sheet, id) {
-  if (!id) return jsonOut_({ status: 'error', message: 'id wajib diisi' });
-  var rowNum = findRowById_(sheet, id);
-  if (rowNum < 0) {
-    return jsonOut_({ status: 'error', message: 'Data tidak ditemukan (id: ' + id + ')' });
-  }
-  sheet.deleteRow(rowNum);
-  SpreadsheetApp.flush();
-  return jsonOut_({ status: 'success', id: String(id) });
-}
-
-function handleClear_(sheet) {
-  var last = sheet.getLastRow();
-  if (last > 1) sheet.deleteRows(2, last - 1);
-  SpreadsheetApp.flush();
-  return jsonOut_({ status: 'success', message: 'Semua data dihapus' });
-}
-
-/* ---------- Menu Spreadsheet ---------- */
-
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('🍽️ Sistem MBG')
-    .addItem('🔄 Inisialisasi (nama file + sheet Data PM)', 'menuInitSheet')
-    .addItem('📥 Impor data dari sheet lain', 'menuMigrate')
-    .addItem('📋 Lihat sheet yang bisa diimpor', 'menuListSheets')
-    .addSeparator()
-    .addItem('🗑️ Hapus semua data Data PM', 'menuClearAll')
-    .addToUi();
-}
-
-function menuInitSheet() {
-  ensureSpreadsheetName_();
-  getOrCreateSheet_();
-  SpreadsheetApp.getUi().alert(
-    'Siap!\n\n' +
-    '• Nama spreadsheet: ' + getSpreadsheet_().getName() + '\n' +
-    '• Sheet data: ' + SHEET_NAME + '\n' +
-    '• Kolom header sudah dibuat otomatis.'
-  );
-}
-
-function menuMigrate() {
-  var result = migrateFromPreviousSheets_('');
-  SpreadsheetApp.getUi().alert(result.message || JSON.stringify(result));
-}
-
-function menuListSheets() {
-  var list = listMigratableSheets_();
-  if (!list.length) {
-    SpreadsheetApp.getUi().alert('Tidak ada sheet lain yang terdeteksi berisi data migrasi.');
-    return;
-  }
-  var msg = list.map(function (s) {
-    return '• ' + s.name + ' (' + s.rows + ' baris data)';
-  }).join('\n');
-  SpreadsheetApp.getUi().alert('Sheet yang bisa diimpor ke "' + SHEET_NAME + '":\n\n' + msg);
-}
-
-function menuClearAll() {
-  var ui = SpreadsheetApp.getUi();
-  var res = ui.alert(
-    'PERINGATAN',
-    'Hapus SEMUA data di sheet "' + SHEET_NAME + '"?\nTidak bisa dibatalkan.',
-    ui.ButtonSet.YES_NO
-  );
-  if (res === ui.Button.YES) {
-    handleClear_(getOrCreateSheet_());
-    ui.alert('Semua data dihapus.');
-  }
-}
-</textarea>
+        <textarea id="gsCode" readonly style="width:100%;height:120px;padding:.8rem 1rem;background:linear-gradient(135deg,#1a1d23,#252830);color:#a5f3fc;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-family:'Fira Code',monospace;font-size:.7rem;line-height:1.5;resize:vertical;outline:none">const SN="Data PM";const HD=['id','namaInstansi','npsn','namaPIC','tipe','kategori','jumlahL','jumlahP','jumlahTotal','createdAt','updatedAt','groupId'];function gs_(){const ss=SpreadsheetApp.getActiveSpreadsheet();if(!ss)throw new Error('Script tidak terikat ke Spreadsheet. Buka lewat Extensions > Apps Script di dalam Google Sheet.');let s=ss.getSheetByName(SN);if(!s)s=ss.getSheetByName('Sheet1');if(!s)s=ss.getSheets()[0];if(!s)s=ss.insertSheet(SN);if(s.getLastRow()===0)s.appendRow(HD);return s}function jo_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON)}function doGet(e){try{const s=gs_();const d=s.getDataRange().getValues();const h=d.shift();const r=d.filter(r=>r[0]).map(r=>{let o={};h.forEach((h,i)=>o[h]=r[i]);return o});return jo_({status:"success",data:r})}catch(err){return jo_({status:"error",message:String(err)})}}function doPost(e){try{const s=gs_();const b=JSON.parse(e.postData.contents);const h=s.getRange(1,1,1,s.getLastColumn()).getValues()[0];if(b.action==="save"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let ru=-1;for(let i=1;i<a.length;i++){if(String(a[i][ic])===String(b.data.id)){ru=i+1;break}}const row=h.map(h=>b.data[h]!==undefined?b.data[h]:"");if(ru>0){s.getRange(ru,1,1,row.length).setValues([row])}else{s.appendRow(row)}return jo_({status:"success"})}if(b.action==="saveBatch"){const rows=Array.isArray(b.rows)?b.rows:[];const rm=Array.isArray(b.removeIds)?b.removeIds:[];const gid=b.groupId||"";const ic=h.indexOf("id"),gc=h.indexOf("groupId");if(rm.length){let d=s.getDataRange().getValues();for(let i=d.length-1;i>0;i--){if(rm.indexOf(String(d[i][ic]))!==-1)s.deleteRow(i+1)}}if(gid){let d=s.getDataRange().getValues();for(let i=d.length-1;i>0;i--){if(String(d[i][gc])===String(gid))s.deleteRow(i+1)}}const cur=s.getDataRange().getValues();const ap=[];rows.forEach(d=>{const row=h.map(h=>d[h]!==undefined?d[h]:"");let f=-1;for(let i=1;i<cur.length;i++){if(String(cur[i][ic])===String(d.id)){f=i+1;break}}if(f>0){s.getRange(f,1,1,row.length).setValues([row])}else{ap.push(row)}});if(ap.length){s.getRange(s.getLastRow()+1,1,ap.length,ap[0].length).setValues(ap)}return jo_({status:"success",count:rows.length})}if(b.action==="delete"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let dl=false;for(let i=a.length-1;i>0;i--){if(String(a[i][ic])===String(b.id)){s.deleteRow(i+1);dl=true;break}}if(!dl)return jo_({status:"error",message:"Data tidak ditemukan (id: "+b.id+")"});return jo_({status:"success"})}if(b.action==="clear"){const l=s.getLastRow();if(l>1)s.deleteRows(2,l-1);return jo_({status:"success"})}return jo_({status:"error",message:"Action tidak dikenal: "+b.action})}catch(err){return jo_({status:"error",message:String(err)})}}</textarea>
         <button class="btn btn-o btn-sm" onclick="copyGsCode()" style="margin-top:.4rem"><i class="fas fa-copy"></i> Copy</button>
     </div>
     <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/xxxxx/exec"></div>
@@ -1073,7 +740,7 @@ const PORSI_KECIL_CATS=['BALITA','ATS < 9','RA','TK','PAUD','SD 1-3','MI 1-3','G
 const PORSI_BESAR_CATS=['BUMIL','BUSUI','SD 4-6','MI 4-6','SMP','MTS','SMA','SMK','MA','PONPES (SANTRI)','GURU SD-SMA/PONPES','TENDIK SD-SMA/PONPES'];
 
 /* ==================== STATE ==================== */
-const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycby6kj1UwglmtcQa2FqKvbCbr9STvfV62LyM6FlaazLEjujXOFQLen-ZwnSR0KfeuxX_/exec';
+const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbzDwyktUjYBFfym7MssdsRfKIxQCVGdj7NIWgXmPU4xvhv_PJta6YcFLiCaFVOSvCA/exec';
 let data=[],curView='instansi',curFilter='semua',curKatFilter='semua',delCb=null,chKat=null,chTipe=null,useGS=false,gsUrl='',searchTimer=null;
 
 /* ==================== SIDEBAR (mobile) ==================== */
@@ -1134,7 +801,7 @@ function toggleTipe(t){
   selKats=selKats.filter(k=>selTipes.includes(getTipeOf(k)));
   renderKatChips();
 }
-function renderTipeBtns(){document.querySelectorAll('.tg-btn[data-tipe]').forEach(b=>b.classList.toggle('active',selTipes.includes(b.dataset.tipe)))}
+function renderTipeBtns(){document.querySelectorAll('.tipe-card[data-tipe]').forEach(b=>b.classList.toggle('active',selTipes.includes(b.dataset.tipe)))}
 function toggleKat(k){
   if(selKats.includes(k))selKats=selKats.filter(x=>x!==k);
   else selKats.push(k);
@@ -1143,16 +810,16 @@ function toggleKat(k){
 function renderKatChips(){
   const ct=document.getElementById('katChips');
   let h='';
-  const chipBtn=k=>{const on=selKats.includes(k);return '<button type="button" class="tg-btn'+(on?' active':'')+'" data-kat="'+escAttr(k)+'" style="flex:0;padding:.35rem .8rem;font-size:.75rem">'+esc(k)+'</button>'};
+  const chipBtn=k=>{const on=selKats.includes(k);return '<button type="button" class="kat-pill'+(on?' active':'')+'" data-kat="'+escAttr(k)+'">'+esc(k)+'</button>'};
   if(selTipes.includes('posyandu')){
-    h+='<div><div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:.3rem"><i class="fas fa-baby" style="margin-right:.3rem"></i>Posyandu</div><div style="display:flex;flex-wrap:wrap;gap:.35rem">'+KAT.posyandu.map(chipBtn).join('')+'</div></div>';
+    h+='<div class="kat-group-block"><div class="kat-group-lbl"><i class="fas fa-baby"></i>Posyandu</div><div class="kat-pill-wrap">'+KAT.posyandu.map(chipBtn).join('')+'</div></div>';
   }
   if(selTipes.includes('sekolah')){
     KAT.sekolah.forEach(g=>{
-      h+='<div><div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:.3rem"><i class="fas fa-school" style="margin-right:.3rem"></i>'+esc(g.group)+'</div><div style="display:flex;flex-wrap:wrap;gap:.35rem">'+g.items.map(chipBtn).join('')+'</div></div>';
+      h+='<div class="kat-group-block"><div class="kat-group-lbl"><i class="fas fa-school"></i>'+esc(g.group)+'</div><div class="kat-pill-wrap">'+g.items.map(chipBtn).join('')+'</div></div>';
     });
   }
-  ct.innerHTML=h||'<div style="font-size:.78rem;color:var(--muted)">Pilih tipe terlebih dahulu</div>';
+  ct.innerHTML=h||'<div class="kat-empty-hint">Pilih tipe terlebih dahulu</div>';
   renderKatRows();
 }
 function setMode(m){
@@ -1163,20 +830,22 @@ function setMode(m){
 }
 function renderKatRows(){
   const ct=document.getElementById('katRows'),mode=document.getElementById('fModeV').value;
-  if(!selKats.length){ct.innerHTML='<div style="font-size:.78rem;color:var(--muted)">Belum ada kategori dipilih</div>';return}
+  if(!selKats.length){ct.innerHTML='<div class="kat-empty-hint">Belum ada kategori dipilih</div>';updateFormSummary();return}
+  const nv=x=>(x===''||x===null||x===undefined)?'':x;
   ct.innerHTML=selKats.map(k=>{
     const v=katVals[k]||{L:'',P:'',T:''};
     const t=mode==='detail'?((Number(v.L)||0)+(Number(v.P)||0)):(Number(v.T)||0);
-    return '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;padding:.5rem .7rem;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.06);border-radius:10px">'
-      +'<div style="flex:1;min-width:0;font-size:.8rem;font-weight:600">'+esc(k)+'</div>'
+    return '<div class="jml-item">'
+      +'<div class="jml-head"><span class="jml-name">'+esc(k)+'</span><span class="total-pill">'+t.toLocaleString('id-ID')+'</span></div>'
+      +'<div class="jml-inputs">'
       +(mode==='detail'
-        ?'<input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="L" placeholder="Laki-laki" min="0" style="width:88px" oninput="calcRow(this)">'
-         +'<span style="color:var(--muted);font-weight:700">+</span>'
-         +'<input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="P" placeholder="Perempuan" min="0" style="width:88px" oninput="calcRow(this)">'
-        :'<input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="T" placeholder="Total" min="0" style="width:120px" oninput="calcRow(this)">')
-      +'<span class="total-pill" style="min-width:72px">'+t.toLocaleString('id-ID')+'</span>'
-      +'</div>';
+        ?'<div class="jml-field"><label>Laki-laki</label><input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="L" placeholder="0" min="0" value="'+nv(v.L)+'" oninput="calcRow(this)"></div>'
+         +'<span class="jml-plus">+</span>'
+         +'<div class="jml-field"><label>Perempuan</label><input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="P" placeholder="0" min="0" value="'+nv(v.P)+'" oninput="calcRow(this)"></div>'
+        :'<div class="jml-field"><label>Total</label><input type="number" class="form-input" data-kat="'+escAttr(k)+'" data-f="T" placeholder="0" min="0" value="'+nv(v.T)+'" oninput="calcRow(this)"></div>')
+      +'</div></div>';
   }).join('');
+  updateFormSummary();
 }
 function calcRow(el){
   const k=el.dataset.kat,f=el.dataset.f;
@@ -1185,8 +854,17 @@ function calcRow(el){
   const mode=document.getElementById('fModeV').value;
   const v=katVals[k];
   const t=mode==='detail'?((Number(v.L)||0)+(Number(v.P)||0)):(Number(v.T)||0);
-  const pill=el.closest('div').querySelector('.total-pill');
+  const pill=el.closest('.jml-item').querySelector('.total-pill');
   if(pill)pill.textContent=t.toLocaleString('id-ID');
+  updateFormSummary();
+}
+function updateFormSummary(){
+  const bar=document.getElementById('formSummary');if(!bar)return;
+  if(!selKats.length){bar.style.display='none';return}
+  const mode=document.getElementById('fModeV').value;
+  const grand=selKats.reduce((s,k)=>{const v=katVals[k]||{L:'',P:'',T:''};return s+(mode==='detail'?((Number(v.L)||0)+(Number(v.P)||0)):(Number(v.T)||0))},0);
+  document.getElementById('fsumVal').textContent=grand.toLocaleString('id-ID')+' orang';
+  bar.style.display='flex';
 }
 document.addEventListener('click',function(e){
   const b=e.target.closest('#katChips button[data-kat]');
@@ -1279,7 +957,8 @@ function deleteData(id){const item=data.find(d=>d.id===id);if(!item)return;showD
 function confirmClear(){if(!data.length){toast('Tidak ada data','i');return}showDel('Hapus Semua','Semua '+data.length+' data akan dihapus?',async()=>{toast('Menghapus semua data...','i');const hadGs=useGS&&gsUrl;if(hadGs){const res=await fetchGS('clear');if(res&&res.status==='success'){await loadRemote();refreshAll();renderLap();resetForm();toast('Semua data dihapus','s');return}}data=[];saveLocal();refreshAll();renderLap();resetForm();toast(hadGs?'Gagal hapus di server, data dihapus lokal saja':'Semua data dihapus','e')})}
 
 /* ==================== RIWAYAT ==================== */
-function renderRiw(){const ct=document.getElementById('riwayatCt'),em=document.getElementById('riwayatE');if(!data.length){ct.innerHTML='';em.style.display='block';return}em.style.display='none';ct.innerHTML=data.slice().reverse().map(d=>{const b=getTipeBadge(d);return'<div style="padding:.55rem .9rem;border-bottom:1px solid var(--border-l);display:flex;align-items:center;gap:.5rem"><div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(d.namaInstansi)+'</div><div style="font-size:.7rem;color:var(--muted);margin-top:.05rem">'+b+' <span class="badge b-kat" style="font-size:.65rem">'+esc(d.kategori)+'</span></div></div><div style="font-weight:700;font-size:.85rem;color:var(--accent2);flex-shrink:0">'+(d.jumlahTotal||0).toLocaleString('id-ID')+'</div><div style="display:flex;gap:.15rem;flex-shrink:0"><button class="btn btn-o btn-icon" style="width:26px;height:26px;font-size:.68rem" onclick="editData(\''+d.id+'\')"><i class="fas fa-pen"></i></button><button class="btn btn-d btn-icon" style="width:26px;height:26px;font-size:.68rem" onclick="deleteData(\''+d.id+'\')"><i class="fas fa-trash"></i></button></div></div>'}).join('')}
+function riAvatar(d){if(d.tipe==='posyandu')return'<div class="ri-avatar pos"><i class="fas fa-baby"></i></div>';if(SDM_CATS.includes(d.kategori))return'<div class="ri-avatar sdm"><i class="fas fa-chalkboard-teacher"></i></div>';return'<div class="ri-avatar sek"><i class="fas fa-school"></i></div>'}
+function renderRiw(){const ct=document.getElementById('riwayatCt'),em=document.getElementById('riwayatE');if(!data.length){ct.innerHTML='';em.style.display='block';return}em.style.display='none';ct.innerHTML=data.slice().reverse().map(d=>{return'<div class="riwayat-item">'+riAvatar(d)+'<div class="ri-body"><div class="ri-name">'+esc(d.namaInstansi)+'</div><div class="ri-meta"><span class="badge b-kat" style="font-size:.63rem">'+esc(d.kategori)+'</span></div></div><div class="ri-val">'+(d.jumlahTotal||0).toLocaleString('id-ID')+'</div><div class="ri-actions"><button class="btn btn-o btn-icon" style="width:26px;height:26px;font-size:.68rem" onclick="editData(\''+d.id+'\')"><i class="fas fa-pen"></i></button><button class="btn btn-d btn-icon" style="width:26px;height:26px;font-size:.68rem" onclick="deleteData(\''+d.id+'\')"><i class="fas fa-trash"></i></button></div></div>'}).join('')}
 
 /* ==================== REKAPITULASI ==================== */
 function renderRekap(){
@@ -1584,20 +1263,6 @@ function toast(msg,type){const c=document.getElementById('toastCt'),t=document.c
 /* ==================== UTILITY ==================== */
 function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('delOv').style.display==='flex')closeDel();else if(document.getElementById('settingsOv').style.display==='flex')closeSettings();else if(document.getElementById('fEditId').value)resetForm()}});
-
-
-async function migrateSheets(){
-  if(!gsUrl){toast('Hubungkan Google Sheets dulu','e');return}
-  toast('Mengimpor data dari sheet lain...','i');
-  const res=await fetchGS('migrate',{});
-  if(res&&res.status==='success'){
-    await loadRemote();
-    refreshAll();renderLap();
-    toast(res.message||('Impor '+ (res.imported||0)+' baris'),'s');
-  }else{
-    toast((res&&res.message)||'Gagal impor — pastikan sudah deploy ulang Kode.gs terbaru','e');
-  }
-}
 
 /* ==================== START ==================== */
 loadGsUrl();loadLocal();refreshAll();renderKatChips();
