@@ -719,19 +719,28 @@
     <div id="gsStatus" style="margin-bottom:1rem"></div>
     <div style="margin-bottom:1rem">
         <h3 style="font-size:.9rem;font-weight:700;margin-bottom:.6rem">Langkah Setup:</h3>
-        <div class="step-box"><strong>1.</strong> Buka <a href="https://docs.google.com/spreadsheets/create" target="_blank" style="color:var(--accent2);font-weight:600">Google Sheets</a>, buat Spreadsheet baru</div>
-        <div class="step-box"><strong>2.</strong> Buat header di baris pertama:<br><code>id | namaInstansi | npsn | namaPIC | tipe | kategori | jumlahL | jumlahP | jumlahTotal | createdAt | updatedAt | groupId</code></div>
-        <div class="step-box"><strong>3.</strong> Di dalam Spreadsheet itu (WAJIB dari dalam Sheet, bukan buka script.google.com terpisah), klik <strong>Extensions → Apps Script</strong>, hapus kode default, paste kode di bawah, lalu klik ikon Simpan</div>
-        <div class="step-box"><strong>4.</strong> Klik <strong>Deploy → New deployment</strong> → pilih tipe <strong>Web app</strong>. Isi <em>Execute as</em>: <strong>Me</strong>, dan <em>Who has access</em> WAJIB <strong>Anyone</strong> (bukan "Anyone with Google account") — ini penyebab paling umum website gagal terhubung</div>
-        <div class="step-box"><strong>5.</strong> Klik <strong>Deploy</strong>, izinkan akses (Authorize access), lalu salin <strong>URL Web App</strong> (diakhiri <code>/exec</code>) dan tempel di kolom bawah</div>
-        <div class="step-box"><strong>Catatan:</strong> Setiap kali kode Apps Script diubah, ulangi Deploy → <strong>Manage deployments</strong> → ikon pensil → <strong>New version</strong> → Deploy, agar perubahan aktif</div>
+        <div class="step-box"><strong>1.</strong> Buka spreadsheet <strong>Pendataan PM</strong> (bukan file lama).</div>
+        <div class="step-box"><strong>2.</strong> Dari dalam spreadsheet itu: <strong>Extensions → Apps Script</strong>. Hapus kode default, paste seluruh isi <code>Kode.gs</code>, Simpan.</div>
+        <div class="step-box"><strong>3.</strong> Di project Apps Script: <strong>File → New → HTML file</strong> → nama tepat <strong>Index</strong> → paste seluruh isi <code>index.html</code> → Simpan.</div>
+        <div class="step-box"><strong>4.</strong> (Opsional) Di spreadsheet: menu <strong>🍽️ Sistem MBG → Inisialisasi</strong> agar sheet "Data PM" + header dibuat otomatis.</div>
+        <div class="step-box"><strong>5.</strong> <strong>Deploy → New deployment</strong> → tipe <strong>Web app</strong>. Execute as: <strong>Me</strong>, Who has access: <strong>Anyone</strong>. Authorize, Deploy, salin URL yang berakhiran <code>/exec</code>.</div>
+        <div class="step-box"><strong>6.</strong> Tempel URL di kolom bawah → klik <strong>Test</strong> lalu <strong>Hubungkan</strong>. Badge sidebar harus hijau "Terhubung".</div>
+        <div class="step-box"><strong>Catatan:</strong> Setiap ubah kode → Deploy → Manage deployments → ikon pensil → New version → Deploy. Script <strong>wajib</strong> dibuat dari dalam spreadsheet Pendataan PM agar data tersimpan di file yang benar.</div>
     </div>
     <div style="margin-bottom:1rem">
         <label class="form-label">Kode Apps Script:</label>
-        <textarea id="gsCode" readonly style="width:100%;height:120px;padding:.8rem 1rem;background:linear-gradient(135deg,#1a1d23,#252830);color:#a5f3fc;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-family:'Fira Code',monospace;font-size:.7rem;line-height:1.5;resize:vertical;outline:none">const SN="Data PM";const HD=['id','namaInstansi','npsn','namaPIC','tipe','kategori','jumlahL','jumlahP','jumlahTotal','createdAt','updatedAt','groupId'];function gs_(){const ss=SpreadsheetApp.getActiveSpreadsheet();if(!ss)throw new Error('Script tidak terikat ke Spreadsheet. Buka lewat Extensions > Apps Script di dalam Google Sheet.');let s=ss.getSheetByName(SN);if(!s)s=ss.getSheetByName('Sheet1');if(!s)s=ss.getSheets()[0];if(!s)s=ss.insertSheet(SN);if(s.getLastRow()===0)s.appendRow(HD);return s}function jo_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON)}function doGet(e){try{const s=gs_();const d=s.getDataRange().getValues();const h=d.shift();const r=d.filter(r=>r[0]).map(r=>{let o={};h.forEach((h,i)=>o[h]=r[i]);return o});return jo_({status:"success",data:r})}catch(err){return jo_({status:"error",message:String(err)})}}function doPost(e){try{const s=gs_();const b=JSON.parse(e.postData.contents);const h=s.getRange(1,1,1,s.getLastColumn()).getValues()[0];if(b.action==="save"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let ru=-1;for(let i=1;i<a.length;i++){if(String(a[i][ic])===String(b.data.id)){ru=i+1;break}}const row=h.map(h=>b.data[h]!==undefined?b.data[h]:"");if(ru>0){s.getRange(ru,1,1,row.length).setValues([row])}else{s.appendRow(row)}return jo_({status:"success"})}if(b.action==="saveBatch"){const rows=Array.isArray(b.rows)?b.rows:[];const rm=Array.isArray(b.removeIds)?b.removeIds:[];const gid=b.groupId||"";const ic=h.indexOf("id"),gc=h.indexOf("groupId");if(rm.length){let d=s.getDataRange().getValues();for(let i=d.length-1;i>0;i--){if(rm.indexOf(String(d[i][ic]))!==-1)s.deleteRow(i+1)}}if(gid){let d=s.getDataRange().getValues();for(let i=d.length-1;i>0;i--){if(String(d[i][gc])===String(gid))s.deleteRow(i+1)}}const cur=s.getDataRange().getValues();const ap=[];rows.forEach(d=>{const row=h.map(h=>d[h]!==undefined?d[h]:"");let f=-1;for(let i=1;i<cur.length;i++){if(String(cur[i][ic])===String(d.id)){f=i+1;break}}if(f>0){s.getRange(f,1,1,row.length).setValues([row])}else{ap.push(row)}});if(ap.length){s.getRange(s.getLastRow()+1,1,ap.length,ap[0].length).setValues(ap)}return jo_({status:"success",count:rows.length})}if(b.action==="delete"){const a=s.getDataRange().getValues();const ic=h.indexOf("id");let dl=false;for(let i=a.length-1;i>0;i--){if(String(a[i][ic])===String(b.id)){s.deleteRow(i+1);dl=true;break}}if(!dl)return jo_({status:"error",message:"Data tidak ditemukan (id: "+b.id+")"});return jo_({status:"success"})}if(b.action==="clear"){const l=s.getLastRow();if(l>1)s.deleteRows(2,l-1);return jo_({status:"success"})}return jo_({status:"error",message:"Action tidak dikenal: "+b.action})}catch(err){return jo_({status:"error",message:String(err)})}}</textarea>
+        <textarea id="gsCode" readonly style="width:100%;height:120px;padding:.8rem 1rem;background:linear-gradient(135deg,#1a1d23,#252830);color:#a5f3fc;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-family:'Fira Code',monospace;font-size:.7rem;line-height:1.5;resize:vertical;outline:none">/* Kode lengkap ada di file Kode.gs
+
+1. Buka spreadsheet "Pendataan PM"
+2. Extensions → Apps Script → paste seluruh Kode.gs → Simpan
+3. File → New → HTML → nama: Index → paste index.html → Simpan
+4. Deploy Web App (Anyone) → salin URL /exec ke kolom di atas
+
+Script TERIKAT ke spreadsheet tempat Anda membuka Apps Script.
+Pastikan URL /exec di sini berasal dari deployment di spreadsheet Pendataan PM. */</textarea>
         <button class="btn btn-o btn-sm" onclick="copyGsCode()" style="margin-top:.4rem"><i class="fas fa-copy"></i> Copy</button>
     </div>
-    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/xxxxx/exec"></div>
+    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/AKfycbzvzBN7KLsANf5Hr64x14qjT-8KSqdGPdU1KWn5-U82aEFp8DkbHSndBwJM8eOka37X/exec"></div>
     <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.25rem"><button class="btn btn-p" onclick="connectGS()"><i class="fas fa-plug"></i> Hubungkan</button><button class="btn btn-o" onclick="testGS()"><i class="fas fa-vial"></i> Test</button><button class="btn btn-d" onclick="disconnectGS()"><i class="fas fa-unlink"></i> Putuskan</button></div>
     <div style="border-top:1px dashed rgba(0,0,0,.1);padding-top:1.15rem;margin-top:.25rem">
         <h3 style="font-size:.9rem;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><i class="fas fa-database" style="color:var(--accent)"></i> Sumber Data Instansi (Sheet PIC/Kader)</h3>
@@ -770,7 +779,7 @@ const PORSI_KECIL_CATS=['BALITA','ATS < 9','RA','TK','PAUD','SD 1-3','MI 1-3','G
 const PORSI_BESAR_CATS=['BUMIL','BUSUI','SD 4-6','MI 4-6','SMP','MTS','SMA','SMK','MA','PONPES (SANTRI)','GURU SD-SMA/PONPES','TENDIK SD-SMA/PONPES'];
 
 /* ==================== STATE ==================== */
-const DEFAULT_GS_URL='https://script.google.com/macros/s/AKfycbynBSYt26P7FQ1A-a8VI4z1KP2cqdMW21ypnC71y6uC0ccbBCZAa6931_wdpGqEojIX/exec';
+const DEFAULT_GS_URL=''; // kosong — isi URL Web App dari spreadsheet Pendataan PM di Pengaturan
 let data=[],curView='instansi',curFilter='semua',curKatFilter='semua',delCb=null,chKat=null,chTipe=null,useGS=false,gsUrl='',searchTimer=null;
 let masterSsId='',masterSheetName='',masterList=[],masterLoaded=false;
 
@@ -783,13 +792,13 @@ function goTo(p){document.querySelectorAll('.page').forEach(x=>x.classList.remov
 
 /* ==================== GOOGLE SHEETS ==================== */
 let lastGsError=null,lastGsCount=0;
-function loadGsUrl(){gsUrl=localStorage.getItem('mbg_gs_url')||DEFAULT_GS_URL;useGS=false;updateConnBadge()}
+function loadGsUrl(){const injected=(typeof window.__MBG_API_URL__!=='undefined'&&window.__MBG_API_URL__)||'';gsUrl=localStorage.getItem('mbg_gs_url')||injected||DEFAULT_GS_URL;useGS=false;updateConnBadge()}
 async function parseGsResponse(res){const text=await res.text();try{return JSON.parse(text)}catch(e){if(/accounts\.google\.com|<html/i.test(text))throw new Error('AUTH');throw new Error('PARSE')}}
 async function fetchGS(action,payload={}){if(!gsUrl)return null;try{const res=await fetch(gsUrl,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action,...payload})});return await parseGsResponse(res)}catch(e){console.error('GAS Error:',e);return null}}
-async function loadRemote(){if(!gsUrl){lastGsError=null;updateConnBadge();return false}try{const res=await fetch(gsUrl);const json=await parseGsResponse(res);if(json.status==='success'&&json.data){data=json.data.map(d=>({id:d.id,namaInstansi:d.namaInstansi||'',npsn:d.npsn||'',namaPIC:d.namaPIC||'',tipe:d.tipe||'posyandu',kategori:d.kategori||'',jumlahL:d.jumlahL!==''&&d.jumlahL!==null?Number(d.jumlahL):null,jumlahP:d.jumlahP!==''&&d.jumlahP!==null?Number(d.jumlahP):null,jumlahTotal:Number(d.jumlahTotal)||0,groupId:d.groupId||'',createdAt:d.createdAt||'',updatedAt:d.updatedAt||''}));saveLocal();useGS=true;lastGsError=null;lastGsCount=data.length;updateConnBadge();return true}throw new Error('STATUS')}catch(e){console.error('GAS load error:',e);useGS=false;lastGsError=e;updateConnBadge();return false}}
+async function loadRemote(){if(!gsUrl){lastGsError=null;updateConnBadge();return false}try{const apiUrl=gsUrl+(gsUrl.indexOf('?')>=0?'&':'?')+'api=1';const res=await fetch(apiUrl);const json=await parseGsResponse(res);if(json.status==='success'&&json.data){data=json.data.map(d=>({id:d.id,namaInstansi:d.namaInstansi||'',npsn:d.npsn||'',namaPIC:d.namaPIC||'',tipe:d.tipe||'posyandu',kategori:d.kategori||'',jumlahL:d.jumlahL!==''&&d.jumlahL!==null?Number(d.jumlahL):null,jumlahP:d.jumlahP!==''&&d.jumlahP!==null?Number(d.jumlahP):null,jumlahTotal:Number(d.jumlahTotal)||0,groupId:d.groupId||'',createdAt:d.createdAt||'',updatedAt:d.updatedAt||''}));saveLocal();useGS=true;lastGsError=null;lastGsCount=data.length;updateConnBadge();return true}throw new Error('STATUS')}catch(e){console.error('GAS load error:',e);useGS=false;lastGsError=e;updateConnBadge();return false}}
 function gsErrMsg(e){if(e&&e.message==='AUTH')return 'Web App masih meminta login Google. Buka Apps Script → Deploy → Manage deployments → edit (ikon pensil) → ubah "Who has access" jadi <strong>Anyone</strong> → Deploy ulang (New version).';if(e&&e.message==='PARSE')return 'Respons server bukan JSON. Pastikan URL diakhiri <code>/exec</code> dan kode Apps Script (doGet/doPost) sudah benar & ter-deploy.';if(e&&e.message==='STATUS')return 'Server merespons tapi status bukan "success". Cek nama sheet ("Data PM") dan header kolom di Google Sheets.';return 'Tidak bisa menghubungi URL Apps Script. Cek koneksi internet, URL, dan pastikan deployment aktif dengan akses "Anyone".'}
 async function retryConnect(){toast('Mencoba menyambungkan ke database...','i');const ok=await loadRemote();if(ok){toast('Berhasil terhubung ke Google Sheets — '+lastGsCount+' data','s');refreshAll();renderLap()}else{toast('Masih gagal terhubung, lihat detail di panel Dashboard','e')}}
-async function testGS(){const url=document.getElementById('gsUrl').value.trim();if(!url){toast('URL wajib diisi','e');return}document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:var(--info-l);border-radius:8px;font-size:.82rem;color:var(--info)"><i class="fas fa-spinner fa-spin"></i> Menguji koneksi...</div>';try{const res=await fetch(url);const json=await parseGsResponse(res);if(json.status==='success')document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:#dcfce7;border-radius:8px;font-size:.82rem;color:#15803d"><i class="fas fa-check-circle"></i> Berhasil! '+((json.data||[]).length)+' data ditemukan. Klik Hubungkan.</div>';else throw new Error('STATUS')}catch(e){document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:var(--danger-l);border-radius:8px;font-size:.82rem;color:var(--danger)"><i class="fas fa-times-circle"></i> '+gsErrMsg(e)+'</div>'}}
+async function testGS(){const url=document.getElementById('gsUrl').value.trim();if(!url){toast('URL wajib diisi','e');return}document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:var(--info-l);border-radius:8px;font-size:.82rem;color:var(--info)"><i class="fas fa-spinner fa-spin"></i> Menguji koneksi...</div>';try{const apiUrl=url+(url.indexOf('?')>=0?'&':'?')+'api=1';const res=await fetch(apiUrl);const json=await parseGsResponse(res);if(json.status==='success'){const ssName=json.spreadsheet||'?';const ssId=json.spreadsheetId||'';const idHint=ssId?(ssId===('1C28gXwo6MFCaO48kxHdL_SvVrcrOOhsHVebRJIYB8Tw')?' ✓ ID benar':' ⚠ ID beda: '+ssId.slice(0,12)+'…'):'';document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:#dcfce7;border-radius:8px;font-size:.82rem;color:#15803d"><i class="fas fa-check-circle"></i> Berhasil! '+((json.data||[]).length)+' data · Sheet: <strong>'+ssName+'</strong>'+idHint+'. Klik Hubungkan.</div>'}else throw new Error('STATUS')}catch(e){document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:var(--danger-l);border-radius:8px;font-size:.82rem;color:var(--danger)"><i class="fas fa-times-circle"></i> '+gsErrMsg(e)+'</div>'}}
 async function connectGS(){const url=document.getElementById('gsUrl').value.trim();if(!url){toast('URL wajib diisi','e');return}gsUrl=url;const ok=await loadRemote();if(!ok){document.getElementById('gsStatus').innerHTML='<div style="padding:.6rem;background:var(--danger-l);border-radius:8px;font-size:.82rem;color:var(--danger)"><i class="fas fa-times-circle"></i> '+gsErrMsg(lastGsError)+'</div>';toast('Gagal terhubung, cek pengaturan deployment','e');return}localStorage.setItem('mbg_gs_url',url);if(data.length===0){const ld=JSON.parse(localStorage.getItem('mbg_data')||'[]');if(ld.length){toast('Sinkronisasi '+ld.length+' data...','i');for(const d of ld)await fetchGS('save',{data:d});await loadRemote();toast('Sinkronisasi selesai','s')}}refreshAll();renderLap();closeSettings();toast('Google Sheets terhubung','s')}
 function disconnectGS(){gsUrl='';useGS=false;lastGsError=null;localStorage.removeItem('mbg_gs_url');updateConnBadge();loadLocal();refreshAll();renderLap();closeSettings();toast('Google Sheets terputus, kembali ke mode lokal','i')}
 function updateConnBadge(){const b=document.getElementById('connBadge'),t=document.getElementById('connText');if(useGS&&gsUrl){b.className='conn-badge conn-on';b.querySelector('.conn-dot').style.background='#15803d';t.textContent='Google Sheets'}else{b.className='conn-badge conn-off';b.querySelector('.conn-dot').style.background='#92400e';t.textContent='Lokal'}renderConnBanner()}
@@ -846,9 +855,24 @@ function toggleTipe(t){
 }
 function renderTipeBtns(){document.querySelectorAll('.tipe-card[data-tipe]').forEach(b=>b.classList.toggle('active',selTipes.includes(b.dataset.tipe)))}
 function toggleKat(k){
-  if(selKats.includes(k))selKats=selKats.filter(x=>x!==k);
-  else selKats.push(k);
+  // Simpan dulu nilai input yang sedang tampil agar tidak hilang saat re-render
+  syncKatValsFromDom();
+  if(selKats.includes(k)){
+    selKats=selKats.filter(x=>x!==k);
+    // Jangan hapus katVals[k] — agar saat dipilih lagi nilainya kembali
+  }else{
+    selKats.push(k);
+    if(!katVals[k])katVals[k]={L:'',P:'',T:''};
+  }
   renderKatChips();
+}
+function syncKatValsFromDom(){
+  document.querySelectorAll('#katRows input[data-kat]').forEach(function(el){
+    var k=el.dataset.kat,f=el.dataset.f;
+    if(!k||!f)return;
+    if(!katVals[k])katVals[k]={L:'',P:'',T:''};
+    katVals[k][f]=el.value;
+  });
 }
 function renderKatChips(){
   const ct=document.getElementById('katChips');
@@ -866,15 +890,28 @@ function renderKatChips(){
   renderKatRows();
 }
 function setMode(m){
+  if(typeof syncKatValsFromDom==='function')syncKatValsFromDom();
   document.getElementById('fModeV').value=m;
   document.getElementById('mD').classList.toggle('active',m==='detail');
   document.getElementById('mT').classList.toggle('active',m==='total');
+  // Saat pindah mode, isi field yang kosong dari field lain
+  selKats.forEach(function(k){
+    var v=katVals[k]||{L:'',P:'',T:''};
+    if(m==='total'){
+      if(v.T===''||v.T===null||v.T===undefined){
+        v.T=String((Number(v.L)||0)+(Number(v.P)||0));
+      }
+    }else{
+      // detail: biarkan L/P; jika kosong tapi T ada, biarkan user isi manual
+    }
+    katVals[k]=v;
+  });
   renderKatRows();
 }
 function renderKatRows(){
   const ct=document.getElementById('katRows'),mode=document.getElementById('fModeV').value;
   if(!selKats.length){ct.innerHTML='<div class="kat-empty-hint">Belum ada kategori dipilih</div>';updateFormSummary();return}
-  const nv=x=>(x===''||x===null||x===undefined)?'':x;
+  const nv=x=>(x===''||x===null||x===undefined)?'':String(x);
   ct.innerHTML=selKats.map(k=>{
     const v=katVals[k]||{L:'',P:'',T:''};
     const t=mode==='detail'?((Number(v.L)||0)+(Number(v.P)||0)):(Number(v.T)||0);
@@ -984,10 +1021,19 @@ function editData(id){
   selTipes=[...new Set(grp.map(r=>r.tipe))];
   selKats=grp.map(r=>r.kategori);
   katVals={};
-  grp.forEach(r=>{katVals[r.kategori]={L:r.jumlahL!==null?r.jumlahL:'',P:r.jumlahP!==null?r.jumlahP:'',T:r.jumlahL===null?r.jumlahTotal:''}});
-  const mode=grp.some(r=>r.jumlahL===null)?'total':'detail';
+  grp.forEach(r=>{
+    const hasDetail=r.jumlahL!=null||r.jumlahP!=null;
+    katVals[r.kategori]={
+      L:r.jumlahL!=null?String(r.jumlahL):'',
+      P:r.jumlahP!=null?String(r.jumlahP):'',
+      T:hasDetail?'':String(r.jumlahTotal!=null?r.jumlahTotal:0)
+    };
+  });
+  const mode=grp.some(r=>r.jumlahL==null&&r.jumlahP==null)?'total':'detail';
   document.getElementById('fModeV').value=mode;
-  renderTipeBtns();renderKatChips();setMode(mode);
+  renderTipeBtns();
+  renderKatChips();
+  setMode(mode);
   document.getElementById('fTitle').textContent='Edit Data ('+grp.length+' kategori)';
   document.getElementById('fIcon').className='fas fa-pen';
   document.getElementById('btnSub').innerHTML='<i class="fas fa-check"></i> Perbarui';
