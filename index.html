@@ -740,7 +740,7 @@ Script TERIKAT ke spreadsheet tempat Anda membuka Apps Script.
 Pastikan URL /exec di sini berasal dari deployment di spreadsheet Pendataan PM. */</textarea>
         <button class="btn btn-o btn-sm" onclick="copyGsCode()" style="margin-top:.4rem"><i class="fas fa-copy"></i> Copy</button>
     </div>
-    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/AKfycbzvzBN7KLsANf5Hr64x14qjT-8KSqdGPdU1KWn5-U82aEFp8DkbHSndBwJM8eOka37X/exec"></div>
+    <div class="form-group"><label class="form-label">URL Web App *</label><input type="text" class="form-input" id="gsUrl" placeholder="https://script.google.com/macros/s/AKfycbztRaHMxsP3YkGl1C06vTjNyJ5W80Ju07e8sny9Txf6YgHLWYxd7N1wvcv6qptQuI20/exec"></div>
     <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.25rem"><button class="btn btn-p" onclick="connectGS()"><i class="fas fa-plug"></i> Hubungkan</button><button class="btn btn-o" onclick="testGS()"><i class="fas fa-vial"></i> Test</button><button class="btn btn-d" onclick="disconnectGS()"><i class="fas fa-unlink"></i> Putuskan</button></div>
     <div style="border-top:1px dashed rgba(0,0,0,.1);padding-top:1.15rem;margin-top:.25rem">
         <h3 style="font-size:.9rem;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><i class="fas fa-database" style="color:var(--accent)"></i> Sumber Data Instansi (Sheet PIC/Kader)</h3>
@@ -1203,7 +1203,7 @@ function dlPdfLap(){
 
     /* Buat elemen sementara untuk PDF - harus visible agar html2canvas bisa render */
     const wrap=document.createElement('div');
-    wrap.style.cssText='position:fixed;left:0;top:0;width:780px;z-index:-9999;background:#fff;font-family:"Plus Jakarta Sans",sans-serif;color:#1a2e23;padding:0;pointer-events:none';
+    wrap.style.cssText='position:absolute;left:-99999px;top:0;width:780px;background:#fff;font-family:"Plus Jakarta Sans",sans-serif;color:#1a2e23;padding:0';
 
     /* Header */
     wrap.innerHTML='<div style="padding:24px 28px 16px;border-bottom:2px solid #10b981">'
@@ -1241,7 +1241,7 @@ function dlPdfLap(){
         items.forEach((d,i)=>{
             const bg=i%2===0?'#fff':'#f9fafb';
             const tipe=d.tipe==='posyandu'?'Posyandu':SDM_CATS.includes(d.kategori)?'SDM/Guru':'Sekolah/Ponpes';
-            tHtml+='<tr style="background:'+bg+'">'
+            tHtml+='<tr style="background:'+bg+';page-break-inside:avoid;break-inside:avoid">'
                 +'<td style="padding:5px 8px;border-bottom:1px solid #e8efeb">'+(i+1)+'</td>'
                 +'<td style="padding:5px 8px;border-bottom:1px solid #e8efeb;font-weight:600">'+esc(d.namaInstansi)+'</td>'
                 +'<td style="padding:5px 8px;border-bottom:1px solid #e8efeb">'+esc(d.namaPIC)+'</td>'
@@ -1263,7 +1263,7 @@ function dlPdfLap(){
             const tipe=e[0].tipe==='posyandu'?'Posyandu':SDM_CATS.includes(e[0].kategori)?'SDM/Guru':'Sekolah/Ponpes';
 
             /* Group header */
-            tHtml+='<div style="margin-top:'+(gi>0?'16':'0')+'px;padding:8px 12px;background:#ecfdf5;border-left:4px solid #10b981;border-radius:0 6px 6px 0;display:flex;align-items:center;justify-content:space-between">'
+            tHtml+='<div style="margin-top:'+(gi>0?'16':'0')+'px;padding:8px 12px;background:#ecfdf5;border-left:4px solid #10b981;border-radius:0 6px 6px 0;display:flex;align-items:center;justify-content:space-between;page-break-inside:avoid;break-inside:avoid;page-break-after:avoid">'
                 +'<div><span style="font-weight:800;font-size:12px;color:#059669">'+(gi+1)+'. '+esc(g.label)+'</span>'
                 +'<span style="margin-left:8px;font-size:9px;color:#6b8577;background:#fff;padding:2px 6px;border-radius:4px">'+tipe+'</span>'
                 +(pB>0||pK>0?'<span style="margin-left:6px;font-size:9px;color:#1d4ed8;background:#eff6ff;padding:2px 6px;border-radius:4px">Besar: '+pB.toLocaleString('id-ID')+'</span>'
@@ -1285,7 +1285,7 @@ function dlPdfLap(){
             if(curView==='instansi'){
                 const merged=mergeByKat(e);
                 merged.forEach(r=>{
-                    tHtml+='<tr>'
+                    tHtml+='<tr style="page-break-inside:avoid;break-inside:avoid">'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb">'+esc(r.kategori)+'</td>'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb;text-align:right">'+(r.jumlahL?r.jumlahL.toLocaleString('id-ID'):'-')+'</td>'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb;text-align:right">'+(r.jumlahP?r.jumlahP.toLocaleString('id-ID'):'-')+'</td>'
@@ -1294,7 +1294,7 @@ function dlPdfLap(){
                 });
             } else {
                 e.forEach(x=>{
-                    tHtml+='<tr>'
+                    tHtml+='<tr style="page-break-inside:avoid;break-inside:avoid">'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb">'+esc(x.namaInstansi)+'</td>'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb">'+esc(x.kategori)+'</td>'
                         +'<td style="padding:4px 8px;border-bottom:1px solid #e8efeb;text-align:right">'+(x.jumlahL!==null?x.jumlahL.toLocaleString('id-ID'):'-')+'</td>'
@@ -1305,7 +1305,7 @@ function dlPdfLap(){
             }
 
             /* Subtotal */
-            tHtml+='<tr style="background:#f0fdf4;font-weight:700">'
+            tHtml+='<tr style="background:#f0fdf4;font-weight:700;page-break-inside:avoid;break-inside:avoid;page-break-before:avoid">'
                 +(curView==='pic'?'<td style="padding:5px 8px;border-top:2px solid #10b981"></td>':'')
                 +'<td style="padding:5px 8px;border-top:2px solid #10b981;color:#059669">Subtotal</td>'
                 +'<td style="padding:5px 8px;border-top:2px solid #10b981;text-align:right">'+sL.toLocaleString('id-ID')+'</td>'
@@ -1327,7 +1327,7 @@ function dlPdfLap(){
         margin:[8,8,8,8],
         filename:'Laporan_MBG_'+new Date().toISOString().slice(0,10)+'.pdf',
         image:{type:'jpeg',quality:0.95},
-        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',width:780,scrollX:0,scrollY:-window.scrollY,ignoreElements:function(el){return el===wrap}},
+        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',width:780,windowWidth:780},
         jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
         pagebreak:{mode:['avoid-all','css','legacy']}
     }).from(wrap).save().then(()=>{
